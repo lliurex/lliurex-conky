@@ -1,0 +1,543 @@
+#!/bin/bash
+
+
+######VARIABLES###########
+#RUTA DE LOS PERFILES DE CONKY
+FILE_PATH=/usr/share/lliurex-conky
+CONKYRC_ADMIN=$FILE_PATH/conkyrc_admins
+CONKYRC_ADMIN_BASE=$FILE_PATH/conkyrc_admins_base
+CONKYRC_STUDENTS=$FILE_PATH/conkyrc_students
+CONKYRC_STUDENTS_BASE=$FILE_PATH/conkyrc_students_base
+#CONKYRC_USED=$FILE_PATH/conkyrc_used
+CONKYRC_HOME=/home/$USER
+CONKYRC_USED=$CONKYRC_HOME/.config/lliurex-conky/conkyrc_used
+
+
+SELECTION_COLOUR2="dodgerblue3"
+SELECTION_COLOUR="white"
+SELECTION_COLOUR_DEFECT="white"
+SELECTION_COLOUR2_DEFECT="dodgerblue3"
+READED=TRUE
+
+SELECTION2=STUDENT
+
+#########Variables para las traducciones############
+export TEXTDOMAIN="lliurex-conky"
+MSG_TITLE=$(gettext "LLIUREX CONKY CONFIGURATOR")
+MSG_INICIAL=$(gettext "Do you want conky on desktop?")
+MSG_CONFIGURATOR=$(gettext "CONKY CONFIGUTATOR. SELECT THE FORMAT THAT YOU LIKE")
+MSG_SELECT_COLOUR=$(gettext "<b><big>INFO </big></b>CONKY TEXT: <small>Select your favourite colour or personalice it for INFO</small>")
+MSG_SELECT_COLOUR2=$(gettext "<b><big>TITLE </big></b>CONKY TEXT: <small>Select you favourite colour or personalice it for TITLE</small>")
+MSG_SELECT_COLOUR_PREDEF=$(gettext "SELECT ONE COLOUR")
+MSG_SELECT_COLOUR_PERSONAL=$(gettext "Select your favourite colour for the: TITLES")
+MSG_SELECT_COLOUR_PERSONAL2=$(gettext "Select your favourite colour for the: INFO ")
+MSG_SELECCIONA=$(gettext "SELECT")
+MSG_ESTILO=$(gettext "STYLE")
+MSG_DESCRIPCION=$(gettext "DESCRIPTION")
+MSG_SERVER=$(gettext "SERVER")
+MSG_SERVER_DESC=$(gettext "Show and monitor, CPU, RAM, NET AND HARD DISK")
+MSG_CLIENT=$(gettext "CLIENT")
+MSG_CLIENT_DESC=$(gettext "Show only basic mode, HOSTNAME, ARCHITECTURE, VERSION AND NET ADDRESS")
+MSG_TITPARAM=$(gettext "CONKY CONFIGURATOR, SELECT THE PARAMETERS WHAT YOU WANT TO SEE IN YOUR DESKTOP:")
+MSG_PARAMETRO=$(gettext "PARAMETER")
+MSG_USER=$(gettext "USER")
+MSG_USER_DESC=$(gettext "User logged to the session in Pc")
+MSG_HOSTNAME=$(gettext "HOSTNAME")
+MSG_HOSTNAME_DESC=$(gettext "Netname to the Pc")
+MSG_CLIENT_TYPE=$(gettext "LliureX type client")
+MSG_ARCHITECTURE=$(gettext "ARCHITECTURE")
+MSG_ARCHITECTURE_DESC=$(gettext "Architecture type, 32 or 64 Bits")
+MSG_VERSION=$(gettext "VERSION")
+MSG_VERSION_DESC=$(gettext "LliureX version installed")
+MSG_NET_ADDRESS=$(gettext "NET ADDRESS")
+MSG_NET_ADDRESS_DESC=$(gettext "Show Ip address for every netcards connected")
+MSG_MIRROR=$(gettext "MIRROR")
+MSG_MIRROR_DESC=$(gettext "LliureX version mirror downloaded")
+MSG_HDD_ALERT=$(gettext "HDD ALERT")
+MSG_HDD_ALERT_DESC=$(gettext "Alert to the user, if the hard disk has occuped 91% or more")
+MSG_KERNEL_VERSION=$(gettext "KERNEL VERSION")
+MSG_KERNEL_VERSION_DESC=$(gettext "kernel version used at the moment")
+MSG_UPTIME=$(gettext "UPTIME")
+MSG_UPTIME_PANEL=$(gettext "Uptime")
+MSG_UPTIME_DESC=$(gettext "how much time has the machine uptime")
+MSG_CPU_TYPE=$(gettext "CPU TYPE")
+MSG_CPU_TYPE_DES=$(gettext "Cpu type installed at the Pc")
+MSG_CPU_BAR=$(gettext "CPU BAR")
+MSG_CPU_BAR_DESC=$(gettext "Process bar for indicate CPU used in %")
+MSG_CPU_GRAPH=$(gettext "CPU GRAPH")
+MSG_CPU_GRAPH_DESC=$(gettext "Cpu graphic to monitorize it at time")
+MSG_RAM_USAGE=$(gettext "RAM USAGE")
+MSG_RAM_USAGE_PANEL=$(gettext "RAM Usage")
+MSG_RAM_USAGE_DESC=$(gettext "Show how many Ram is installed and how many Ram is used at the moment")
+MSG_RAM_BAR=$(gettext "RAM BAR")
+MSG_RAM_BAR_DESC=$(gettext "Ram bar to indicate how many it's used at the moment")
+MSG_SWAP_USAGE=$(gettext "SWAP USAGE")
+MSG_SWAP_USAGE_PANEL=$(gettext "SWAP Usage")
+MSG_SWAP_USAGE_DESC=$(gettext "Show how many Swap is installed and how many Swap is used at the moment")
+MSG_SWAP_BAR=$(gettext "SWAP BAR")
+MSG_SWAP_BAR_DESC=$(gettext "Swap bar to indicate how many it's used at the moment")
+MSG_NET_ADDRESS=$(gettext "NET ADDRESS")
+MSG_NET_ADDRESS_DESC=$(gettext "Show Ip address for every netcards connected")
+MSG_NET_DOWNLOAD=$(gettext "NET DOWNLOAD")
+MSG_NET_DOWNLOAD_DESC=$(gettext "Show net speed downloading files")
+MSG_NET_UPLOAD=$(gettext "NET UPLOAD")
+MSG_NET_UPLOAD_DESC=$(gettext "Show net speed uploading files")
+MSG_HDD_USED=$(gettext "HDD USED")
+MSG_HDD_USED_DESC=$(gettext "Bar to indicates HDD used")
+MSG_DATOS_PANEL=$(gettext "DATA")
+MSG_SYSTEM_PANEL=$(gettext "SYSTEM")
+MSG_HDD_PANEL=$(gettext "HDD")
+MSG_SERVER_PANEL=$(gettext "Server")
+MSG_LIGERO_PANEL=$(gettext "Thin")
+MSG_PESADO_PANEL=$(gettext "Heavy")
+MSG_SEMILIGERO_PANEL=$(gettext "Fat")
+MSG_DESKTOP_PANEL=$(gettext "Desktop")
+MSG_COLOUR_QUESTION=$(gettext "Do you want to change colour fonts or use default mode?")
+MSG_BOTON_COLOR_OK=$(gettext "DEFAULT")
+MSG_BOTON_COLOR_CANCEL=$(gettext "CHANGE")
+MSG_TIME=$(gettext "TIME")
+MSG_TIME_DESC=$(gettext "You can show the time with this clock in the desktop")
+MSG_DATE=$(gettext "DATE")
+MSG_DATE_DESC=$(gettext "You can show the date in your desktop")
+MSG_SHADE=$(gettext "TRANSPARENT")
+MSG_SHADE_DESC=$(gettext "You eliminate the shadow in Conky desktop")
+MSG_BLACK=$(gettext "black")
+MSG_WHITE=$(gettext "white")
+MSG_CYAN=$(gettext "cyan")
+MSG_RED=$(gettext "red")
+MSG_GREEN=$(gettext "green")
+MSG_YELLOW=$(gettext "yellow")
+MSG_PURPLE=$(gettext "purple")
+MSG_PERSONAL_COLOUR=$(gettext "Personal colour")
+
+
+
+
+##Funcion para el server y su mirror
+function conky_mirror () {
+
+	VERSION_32='0'
+	VERSION_64='0'
+	FICHERO='/tmp/mirror_version.txt'
+
+	rm $FICHERO
+	
+
+	ARQ=$(find /net/mirror/llx16/pool/main/l/lliurex-meta -name '*386.deb' | head -1 )
+	VERSION=$(find /net/mirror/llx16/pool/main/l/lliurex-version-timestamp -name 'lliurex-version-timestamp*.deb' | head -1)
+
+	if [ -n "$ARQ" ]; then 
+	
+			touch $FICHERO
+			NUMERO_32=$(echo $VERSION | cut -d_ -f2 )
+			echo 'VERSION 32 BITS:' $NUMERO_32 >> $FICHERO
+			
+	fi
+
+	ARQ=$(find /net/mirror/llx16/pool/main/l/lliurex-meta -name '*amd64.deb' | head -1)
+	VERSION=$(find /net/mirror/llx16/pool/main/l/lliurex-version-timestamp -name 'lliurex-version-timestamp*.deb' | head -1)
+
+	if [ -n "$ARQ" ]; then 
+			
+			if [ ! -f $FICHERO ]; then
+				touch $FICHERO
+			fi
+			NUMERO_64=$(echo $VERSION | cut -d_ -f2 )
+			echo 'VERSION 64 BITS:' $NUMERO_64 >> $FICHERO
+			
+	fi
+
+}
+
+
+##Compruebo la version de conky a usar
+
+lliurex-version > /tmp/conky-test.txt
+echo $LTSP_FATCLIENT > /tmp/conky-test-fat.txt
+
+SERVIDOR=$(grep "server" /tmp/conky-test.txt -c) 
+#echo "Variable Servidor es $SERVIDOR"
+if [ "$SERVIDOR" != "0" ]; then
+	Z=$(echo $DISPLAY | cut -d ":" -f 1)
+	#echo "La variable Z es: $Z"
+	if [ -z $Z ]; then
+		echo "Soy un Servidor"
+		#conky -c $CONKYRC_USED
+		SOY="SERVER"
+		conky_mirror
+	else
+		echo "Soy un Ligero"
+		#conky -c $CONKYRC_STUDENTS
+		SOY="STUDENT"
+	fi
+else
+	CLIENTE=$(grep "client" /tmp/conky-test.txt -c)
+	if [  "$CLIENTE" != "0" ]; then
+		SEMI=$(grep "true" /tmp/conky-test-fat.txt -c)
+		if [  "$SEMI" != "0" ]; then
+			echo "Soy Semiligero"
+			#conky -c $CONKYRC_STUDENTS
+			SOY="STUDENT"
+		else
+			echo "Soy un Pesado"
+			#conky -c $CONKYRC_STUDENTS
+			SOY="STUDENT"
+		fi
+	else
+			echo "Soy un Desktop"
+			#conky -c $CONKYRC_USED
+			SOY="STUDENT"
+	fi
+fi
+
+echo "Utilizare el script de $SOY"
+
+####FUNCIONES#####
+
+function cancelar () {
+
+	if [[ $1 -eq 1 ]] ; then
+			#Contesto que no quiere que sea visible
+			echo "No sera visible, se ha cancelado el proceso"
+			:> $CONKYRC_USED
+			echo '#modified_by_user' >> $CONKYRC_USED
+			zero-center set-non-configured lliurex-conky
+			zero-center remove-pulsating-color lliurex-conky
+			exit 0
+	fi
+
+}
+
+
+##QUEREMOS CONKY VISIBLE O NO##
+function avaiable (){
+	zenity --title "$MSG_TITLE" --question --text "<b>$MSG_INICIAL</b>"  
+	cancelar $?
+}
+
+##INFORMAMOS DE LO QUE SOMOS Y RECOMENDAMOS UN CONKY
+
+function recomends () {
+	if [[ $1 != "STUDENT" ]]; then
+		PRESELECT_SERVER="TRUE"
+		PRESELECT_STUDENT="FALSE"
+	else
+		PRESELECT_SERVER="FALSE"
+		PRESELECT_STUDENT="TRUE"
+	fi
+	
+	SELECTION2=`zenity  --title "$MSG_TITLE" --list  --width 900 --height=250 --text "$MSG_CONFIGURATOR" --radiolist  --column "$MSG_SELECCIONA" --hide-column=2 --column "PARAMETRO" --column "$MSG_ESTILO" --column "$MSG_DESCRIPCION" \
+					$PRESELECT_SERVER "SERVER" "$MSG_SERVER" "$MSG_SERVER_DESC" \
+					$PRESELECT_STUDENT "CLIENTE" "$MSG_CLIENT" "$MSG_CLIENT_DESC" \
+					--separator=":"`
+	cancelar $?
+	echo $SELECTION2
+
+}
+
+
+##LECTURA DE DATOS CONKY STUDENT##
+function student_rc () {
+	SELECTION=`zenity  --title "$MSG_TITLE" --list  --width 550 --height=420 --text "$MSG_TITPARAM" --checklist  --column "$MSG_SELECCIONA" --hide-column=2 --column "SELECCIONA" --column "$MSG_PARAMETRO" --column "$MSG_DESCRIPCION" \
+					TRUE "USUARIO" "$MSG_USER" "$MSG_USER_DESC" \
+					TRUE "EQUIPO" "$MSG_HOSTNAME" "$MSG_HOSTNAME_DESC" \
+					TRUE "CLIENTE" "$MSG_CLIENT" "$MSG_CLIENT_TYPE" \
+					TRUE "ARQUITECTURA" "$MSG_ARCHITECTURE" "$MSG_ARCHITECTURE_DESC" \
+					TRUE "VERSION" "$MSG_VERSION" "$MSG_VERSION_DESC" \
+					TRUE "IP_ADDRESS" "$MSG_NET_ADDRESS" "$MSG_NET_ADDRESS_DESC" \
+					--separator=":"`
+	cancelar $?
+		#echo "$SELECTION"
+}
+
+##LECTURA DE DATOS CONKY SERVER##
+function server_rc () {
+
+	SELECTION=`zenity  --title "$MSG_TITLE" --list  --width 850 --height=620 --text "$MSG_TITPARAM" --checklist --column "$MSG_SELECCIONA" --hide-column=2  --column "SELECCIONA" --column "$MSG_PARAMETRO" --column "$MSG_DESCRIPCION" \
+				$READED "USUARIO" "$MSG_USER" "$MSG_USER_DESC" \
+				TRUE "HORA" "$MSG_TIME" "$MSG_TIME_DESC" \
+				TRUE "DIA" "$MSG_DATE" "$MSG_DATE_DESC" \
+				TRUE "EQUIPO" "$MSG_HOSTNAME" "$MSG_HOSTNAME_DESC" \
+				TRUE "CLIENTE" "$MSG_CLIENT" "$MSG_CLIENT_TYPE" \
+				TRUE "ARQUITECTURA"  "$MSG_ARCHITECTURE" "$MSG_ARCHITECTURE_DESC" \
+				TRUE "VERSION" "$MSG_VERSION" "$MSG_VERSION_DESC" \
+				TRUE "MIRROR_VERSION" "$MSG_MIRROR" "$MSG_MIRROR_DESC" \
+				TRUE "HDD_ALERT" "$MSG_HDD_ALERT" "$MSG_HDD_ALERT_DESC" \
+				TRUE "KERNEL" "$MSG_KERNEL_VERSION" "$MSG_KERNEL_VERSION_DESC" \
+				TRUE "UPTIME" "$MSG_UPTIME" "$MSG_UPTIME_DESC" \
+				TRUE "CPU_TYPE" "$MSG_CPU_TYPE" "$MSG_CPU_TYPE" \
+				TRUE "CPU_BAR" "$MSG_CPU_BAR" "$MSG_CPU_BAR_DESC" \
+				FALSE "CPU_GRAPH" "$MSG_CPU_GRAPH" "$MSG_CPU_GRAPH_DESC" \
+				TRUE "RAM_USAGE" "$MSG_RAM_USAGE" "$MSG_RAM_USAGE_DESC" \
+				FALSE "RAM_BAR" "$MSG_RAM_BAR" "$MSG_RAM_BAR_DESC" \
+				TRUE "SWAP_USAGE" "$MSG_SWAP_USAGE" "$MSG_SWAP_USAGE_DESC" \
+				FALSE "SWAP_BAR" "$MSG_SWAP_BAR" "$MSG_SWAP_BAR_DESC" \
+				TRUE "IP_ADDRESS" "$MSG_NET_ADDRESS" "$MSG_NET_ADDRESS_DESC" \
+				FALSE "NET_DOWNLOAD" "$MSG_NET_DOWNLOAD" "$MSG_NET_DOWNLOAD_DESC" \
+				FALSE "NET_UPLOAD" "$MSG_NET_UPLOAD" "$MSG_NET_UPLOAD_DESC" \
+				TRUE "HDD_USED" "$MSG_HDD_USED" "$MSG_HDD_USED_DESC" \
+				FALSE "SHADE" "$MSG_SHADE" "$MSG_SHADE_DESC" \
+				--separator=":"`
+	cancelar $?
+
+}
+
+##FUNCION PARA COLORES DE LAS FUENTES
+
+function text_colour_client {
+
+	SELECTION_COLOUR=`zenity --title "$MSG_TITLE" --list  --width 400 --height=300 --text "$MSG_SELECT_COLOUR" --radiolist  --column "$MSG_SELECCIONA" --hide-column=2 --column "SELECCIONA" --column "$MSG_SELECT_COLOUR_PREDEF"  --cancel-label="$MSG_PERSONAL_COLOUR"\
+					TRUE "BLACK" "$MSG_BLACK" \
+					FALSE "WHITE" "$MSG_WHITE" \
+					FALSE "CYAN" "$MSG_CYAN" \
+					FALSE "RED" "$MSG_RED" \
+					FALSE "GREEN" "$MSG_GREEN" \
+					FALSE "YELLOW" "$MSG_YELLOW" \
+					FALSE "PURPLE" "$MSG_PURPLE" \
+					--separator=":"`		
+	#SE QUIERE COLOR PERSONALIZADO
+	if [[  $? -eq  1 ]]; then
+		SELECTION_COLOUR=`zenity --title "$MSG_SELECT_COLOUR_PERSONAL2" --color-selection --show-palette `
+		cancelar $?
+		COL1=$( echo "$SELECTION_COLOUR" | cut -d "," -f1 | cut -d "(" -f2 )
+		COL2=$( echo "$SELECTION_COLOUR" | cut -d "," -f2 )
+		COL3=$( echo "$SELECTION_COLOUR" | cut -d "," -f3 | cut -d ")" -f2 )
+		SELECTION_COLOUR=$( hexcolor COL1 COL2 COL3 )
+		SELECTION_COLOUR=$( echo "$SELECTION_COLOUR" | cut -d "#" -f2 )
+	fi
+}
+
+##funcion para pasar a hexadecimal el rgb
+function hexcolor() {
+    local a b c=({0..9} {a..f}) d=\#
+    for b ;do
+        for a in / % ;do
+            d+=${c[$b$a 0x10]}
+        done
+    done
+    echo $d
+}
+
+
+function text_colour_server {
+
+	SELECTION_COLOUR2=`zenity  --title "$MSG_TITLE" --list  --width 400 --height=300 --text "$MSG_SELECT_COLOUR2" --radiolist  --column "$MSG_SELECCIONA" --hide-column=2 --column "SELECCIONA" --column "$MSG_SELECT_COLOUR_PREDEF" --cancel-label="$MSG_PERSONAL_COLOUR"\
+					TRUE "BLACK" "$MSG_BLACK" \
+					FALSE "WHITE" "$MSG_WHITE" \
+					FALSE "CYAN" "$MSG_CYAN" \
+					FALSE "RED" "$MSG_RED" \
+					FALSE "GREEN" "$MSG_GREEN" \
+					FALSE "YELLOW" "$MSG_YELLOW" \
+					FALSE "PURPLE" "$MSG_PURPLE" \
+					--separator=":"`		
+	#SE QUIERE COLOR PERSONALIZADO
+	if [[  $? -eq  1 ]]; then
+		SELECTION_COLOUR2=`zenity --title "$MSG_SELECT_COLOUR_PERSONAL" --color-selection --show-palette `
+		cancelar $?
+		COL1=$( echo "$SELECTION_COLOUR2" | cut -d "," -f1 | cut -d "(" -f2 )
+		COL2=$( echo "$SELECTION_COLOUR2" | cut -d "," -f2 )
+		COL3=$( echo "$SELECTION_COLOUR2" | cut -d "," -f3 | cut -d ")" -f2 )
+		SELECTION_COLOUR2=$( hexcolor COL1 COL2 COL3 )
+		SELECTION_COLOUR2=$( echo "$SELECTION_COLOUR2" | cut -d "#" -f2 )
+	fi
+		
+	
+	SELECTION_COLOUR=`zenity --title "$MSG_TITLE" --list  --width 400 --height=300 --text "$MSG_SELECT_COLOUR" --radiolist  --column "$MSG_SELECCIONA" --hide-column=2 --column "SELECCIONA" --column "$MSG_SELECT_COLOUR_PREDEF"   --cancel-label="$MSG_PERSONAL_COLOUR"\
+					TRUE "BLACK" "$MSG_BLACK" \
+					FALSE "WHITE" "$MSG_WHITE" \
+					FALSE "CYAN" "$MSG_CYAN" \
+					FALSE "RED" "$MSG_RED" \
+					FALSE "GREEN" "$MSG_GREEN" \
+					FALSE "YELLOW" "$MSG_YELLOW" \
+					FALSE "PURPLE" "$MSG_PURPLE" \
+					--separator=":"`		
+	#SE QUIERE COLOR PERSONALIZADO
+	if [[  $? -eq  1 ]]; then
+		SELECTION_COLOUR=`zenity --title "$MSG_SELECT_COLOUR_PERSONAL2" --color-selection --show-palette `
+		cancelar $?
+		COL1=$( echo "$SELECTION_COLOUR" | cut -d "," -f1 | cut -d "(" -f2 )
+		COL2=$( echo "$SELECTION_COLOUR" | cut -d "," -f2 )
+		COL3=$( echo "$SELECTION_COLOUR" | cut -d "," -f3 | cut -d ")" -f2 )
+		SELECTION_COLOUR=$( hexcolor COL1 COL2 COL3 )
+		SELECTION_COLOUR=$( echo "$SELECTION_COLOUR" | cut -d "#" -f2 )
+		
+	fi
+}
+
+function change_colour {
+	zenity --title "$MSG_TITLE" --question --text "$MSG_COLOUR_QUESTION" --ok-label="$MSG_BOTON_COLOR_OK" --cancel-label="$MSG_BOTON_COLOR_CANCEL"
+	if [[  $? !=  0 ]]; then 
+		if [[ $SOY = "CLIENTE" ]]; then
+			text_colour_client
+		else
+			text_colour_server
+		fi
+	else
+		if [[ $SOY = "CLIENTE" ]]; then
+			SELECTION_COLOUR="$SELECTION_COLOUR_DEFECT"
+		else
+			SELECTION_COLOUR2="$SELECTION_COLOUR2_DEFECT"
+			SELECTION_COLOUR="$SELECTION_COLOUR_DEFECT"
+		fi
+		
+	fi	
+
+}
+
+
+##########PROGRAMA PRINCIPAL############
+zero-center add-pulsating-color lliurex-conky
+echo "??????????????????????????"
+echo $CONKYRC_HOME
+
+if [[ ! -e $CONKYRC_HOME/.config/lliurex-conky ]]; then
+	mkdir -p $CONKYRC_HOME/.config/lliurex-conky
+fi
+
+if [[ ! -f /tmp/architecture.txt ]]; then
+	touch /tmp/architecture.txt
+	chmod 777 /tmp/architecture.txt
+fi
+
+uname -m > /tmp/architecture.txt
+
+killall conky
+avaiable
+recomends $SOY
+SOY="$SELECTION2"
+
+if [[ $SOY != "CLIENTE" ]]; then
+	change_colour
+	server_rc
+	if [[ -f $CONKYRC_USED ]]; then
+		rm $CONKYRC_USED
+	fi
+	cp $CONKYRC_ADMIN_BASE $CONKYRC_USED
+	echo "" >>$CONKYRC_USED
+	
+	
+	##DETERMINAMOS LOS COLORES DE LAS FUENTES
+	echo ' default_color '$SELECTION_COLOUR' ' >> $CONKYRC_USED
+	echo 'template0 ${font AvantGardeLTMedium:bold:size=10}${color '$SELECTION_COLOUR2'}\1 ${hr 2}${color '$SELECTION_COLOUR'}${font}${voffset 1}' >>  $CONKYRC_USED
+	
+	#FONDO TRANSPARENTE O NO
+	if [[ $SELECTION == *SHADE* ]] ; then echo 'own_window_transparent yes' >> $CONKYRC_USED; echo '' >> $CONKYRC_USED; fi
+	
+	##COMIENZA LA CONFIGURACION
+	echo "TEXT" >>  $CONKYRC_USED
+	if [[ $SELECTION == *HORA* ]] ; then echo '${color '$SELECTION_COLOUR'}${font}${font AvantGardeLTMedium::size=38}$alignc${time %H:%M}$font${color '$SELECTION_COLOUR'}${font AvantGardeLTMedium:size=15}' >> $CONKYRC_USED;fi
+	if [[ $SELECTION == *DIA* ]] ; then echo '$alignc${time %a}, ${time %d %b %Y}$font${color '$SELECTION_COLOUR'}' >> $CONKYRC_USED; echo '' >> $CONKYRC_USED; fi
+		
+	####DATOS INICIALES####
+	if [[ $SELECTION == *USUARIO* ]] || [[ $SELECTION == *EQUIPO* ]] || [[ $SELECTION == *CLIENTE* ]] || [[ $SELECTION == *ARQUITECTURA* ]] || [[ $SELECTION == *VERSION* ]] ;  then echo '${template0 '$MSG_DATOS_PANEL'}' >> $CONKYRC_USED;fi
+	if [[ $SELECTION == *USUARIO* ]] ; then echo ''$MSG_USER': $LOGNAME' >> $CONKYRC_USED;fi
+	if [[ $SELECTION == *EQUIPO* ]] ; then echo ''$MSG_HOSTNAME': $nodename' >> $CONKYRC_USED;fi
+	if [[ $SELECTION == *CLIENTE* ]] ; then echo ''$MSG_CLIENT': ${if_match "${texeci 6000000 grep "server" /tmp/conky-test.txt -c}" != "0"}${if_empty ${texeci 1000 echo $DISPLAY | cut -d ":" -f 1}}'$MSG_SERVER_PANEL'${else}'$MSG_LIGERO_PANEL'${endif}${else}${if_match "${texeci 1000 grep "client" /tmp/conky-test.txt -c}" != "0"}${if_empty ${texeci 1000 cat /tmp/conky-test-fat.txt | grep true }}'$MSG_PESADO_PANEL'${else}'$MSG_SEMILIGERO_PANEL'${endif}${else}'$MSG_DESKTOP_PANEL'${endif}${endif}' >> $CONKYRC_USED;fi
+	if [[ $SELECTION == *ARQUITECTURA* ]] ; then echo ''$MSG_ARCHITECTURE': ${if_match "${texeci 6000000 grep "x86_64" /tmp/architecture.txt -c}" != "0"}64 Bits${else}32 Bits${endif}' >> $CONKYRC_USED;fi
+	if [[ $SELECTION == *VERSION* ]] ; then echo ''$MSG_VERSION':${texeci 60000 lliurex-version -n}' >> $CONKYRC_USED;fi
+	if [[ $SELECTION == *MIRROR_VERSION* ]] ; then
+			echo '${if_existing /tmp/mirror_version.txt}${if_match ${texeci 60000 grep "VERSION 32" /tmp/mirror_version.txt -c}!=0}${if_match ${texeci 1000 grep "VERSION 64" /tmp/mirror_version.txt -c}!=0}${template9}${else}${template8 32}${endif}${else}${if_match ${texeci 1000 grep "VERSION 64" /tmp/mirror_version.txt -c}!=0}${template8 64}${endif}${endif}${else}NO MIRROR DONE${endif}' >> $CONKYRC_USED
+	fi
+	####SYSTEMA####
+	if [[ $SELECTION == *KERNEL* ]] || [[ $SELECTION == *UPTIME* ]] ;  then echo '${template0 '$MSG_SYSTEM_PANEL'}' >> $CONKYRC_USED;fi
+	if [[ $SELECTION == *KERNEL* ]] ; then echo 'Kernel $alignr $kernel' >> $CONKYRC_USED;fi
+	if [[ $SELECTION == *UPTIME* ]] ; then echo ''$MSG_UPTIME_PANEL' $alignr $uptime' >> $CONKYRC_USED;fi
+	####CPU####
+	if [[ $SELECTION == *CPU* ]] ;  then echo '${template0 CPU}' >> $CONKYRC_USED;fi
+	if [[ $SELECTION == *CPU_TYPE* ]] ; then echo "\${texeci 6000000 cat /proc/cpuinfo | grep 'model name' | cut -c 14-42 | uniq }" >> $CONKYRC_USED;fi
+	if [[ $SELECTION == *CPU_BAR* ]] ; then echo '$cpu % ${cpubar}' >> $CONKYRC_USED;fi
+	if [[ $SELECTION == *CPU_GRAPH* ]] ; then 
+		echo '${cpugraph}' >> $CONKYRC_USED;
+	fi
+	####RAM####
+	if [[ $SELECTION == *RAM* ]] || [[ $SELECTION == *SWAP* ]] ;  then echo '${template0 RAM}' >> $CONKYRC_USED;fi
+	if [[ $SELECTION == *RAM_USAGE* ]] ; then echo ''$MSG_RAM_USAGE_PANEL': $memperc% $alignr $memmax' >> $CONKYRC_USED;fi
+	if [[ $SELECTION == *RAM_BAR* ]] ; then echo '$membar' >> $CONKYRC_USED;fi
+	if [[ $SELECTION == *SWAP_USAGE* ]] ; then echo ''$MSG_SWAP_USAGE_PANEL': $swapperc% $alignr $swapmax' >> $CONKYRC_USED;fi
+	if [[ $SELECTION == *SWAP_BAR* ]] ; then echo '${swapbar}' >> $CONKYRC_USED;fi
+	####NETWORK####
+	if [[ $SELECTION == *IP_ADDRESS* ]] && [[ $SELECTION == *NET_DOWNLOAD* ]] && [[ $SELECTION == *NET_UPLOAD* ]] ;  then 
+		index=0
+		for i in $( ifconfig | grep 'Ethernet' | grep -v ':42' | awk '{print $1}' );
+		do
+			NET_TITLE=$( echo "$i" | tr '[:lower:]' '[:upper:]' )
+			echo '${template3 '$i' '$NET_TITLE'}${template4 wlan'$index' WLAN'$index'}' >> $CONKYRC_USED;
+			index=$((index+1))
+		done
+	
+	elif [[ $SELECTION == *NET_DOWNLOAD* ]] ;  then
+		index=0
+		for i in $( ifconfig | grep 'Ethernet' | grep -v ':42' | awk '{print $1}' );
+		do
+			NET_TITLE=$( echo "$i" | tr '[:lower:]' '[:upper:]' )
+			echo '${template5 '$i' '$NET_TITLE'}${template5 wlan'$index' WLAN'$index'}' >> $CONKYRC_USED;
+			index=$((index+1))
+		done
+		
+	elif [[ $SELECTION == *NET_UPLOAD* ]] ;  then
+		index=0
+		for i in $( ifconfig | grep 'Ethernet' | grep -v ':42' | awk '{print $1}' );
+		do
+			NET_TITLE=$( echo "$i" | tr '[:lower:]' '[:upper:]' )
+			echo '${template6 '$i' '$NET_TITLE'}${template6 wlan'$index' WLAN'$index'}' >> $CONKYRC_USED;
+			index=$((index+1))
+		done
+	elif [[ $SELECTION == *IP_ADDRESS* ]] ;  then 
+		index=0
+		for i in $( ifconfig | grep 'Ethernet' | grep -v ':42' | awk '{print $1}' );
+		do
+			NET_TITLE=$( echo "$i" | tr '[:lower:]' '[:upper:]' )
+			echo '${template7 '$i' '$NET_TITLE'}' >> $CONKYRC_USED;
+			index=$((index+1))
+		done
+	fi
+	####HDD####
+	
+	if [[ $SELECTION == *HDD* ]]  &&  [[ $SELECTION == *HDD_ALERT* ]] ; then echo '${template0 '$MSG_HDD_PANEL'}' >> $CONKYRC_USED; echo '${if_mounted /}${template1 /}${if_match ${fs_used_perc /}>=91}${texeci 1000 /usr/share/lliurex-conky/hdd_full}${else}${endif}$endif' >> $CONKYRC_USED;  echo '${if_mounted /net}${template1 /net}${if_match ${fs_used_perc /net}>=91}${texeci 1000 /usr/share/lliurex-conky/hdd_full_net}${else}${endif}$endif' >> $CONKYRC_USED;fi
+
+	if [[ $SELECTION == *HDD* ]]  &&  [[ $SELECTION != *HDD_ALERT* ]] ; then echo '${template0 '$MSG_HDD_PANEL'}' >> $CONKYRC_USED; echo '${if_mounted /}${template1 /}$endif' >> $CONKYRC_USED; echo '${if_mounted /net}${template1 /net}$endif' >> $CONKYRC_USED; fi
+	
+	if [[ $SELECTION != *HDD* ]]  &&  [[ $SELECTION == *HDD_ALERT* ]] ; then echo '${if_mounted /}${if_match ${fs_used_perc /}>=91}${texeci 1000 /usr/share/lliurex-conky/hdd_full}${else}${endif}$endif' >> $CONKYRC_USED;  echo '${if_mounted /net}${if_match ${fs_used_perc /net}>=91}${texeci 1000 /usr/share/lliurex-conky/hdd_full_net}${else}${endif}$endif' >> $CONKYRC_USED;fi
+	#####LINEA QUE ME SIRVE PARA INDICAR QUE FUE MODIFICADO POR EL USUARIO, SE ANYADE AL INICIO DEL FICHERO
+	sed -i '1s/^/#modified_by_user\n/'  $CONKYRC_USED
+	
+	conky -c $CONKYRC_USED &
+
+else
+	change_colour
+	student_rc
+	if [[ -f $CONKYRC_USED ]]; then
+		rm $CONKYRC_USED
+	fi
+	cp $CONKYRC_STUDENTS_BASE $CONKYRC_USED
+	
+	##DETERMINAMOS LOS COLORES DE LAS FUENTE
+	echo ' default_color '$SELECTION_COLOUR' ' >> $CONKYRC_USED
+	
+	
+	
+	##COMIENZA LA CONFIGURACION
+	echo "TEXT" >>  $CONKYRC_USED
+	echo '$hr' >> $CONKYRC_USED
+	
+	####DATOS INICIALES####
+	if [[ $SELECTION == *USUARIO* ]] ; then echo ''$MSG_USER': $LOGNAME' >> $CONKYRC_USED;fi
+	if [[ $SELECTION == *EQUIPO* ]] ; then echo ''$MSG_HOSTNAME': $nodename' >> $CONKYRC_USED;fi
+	if [[ $SELECTION == *CLIENTE* ]] ; then echo ''$MSG_CLIENT': ${if_match "${texeci 6000000 grep "server" /tmp/conky-test.txt -c}" != "0"}${if_empty ${texeci 1000 echo $DISPLAY | cut -d ":" -f 1}}'$MSG_SERVER_PANEL'${else}'$MSG_LIGERO_PANEL'${endif}${else}${if_match "${texeci 1000 grep "client" /tmp/conky-test.txt -c}" != "0"}${if_empty ${texeci 1000 cat /tmp/conky-test-fat.txt | grep true }}'$MSG_PESADO_PANEL'${else}'$MSG_SEMILIGERO_PANEL'${endif}${else}'$MSG_DESKTOP_PANEL'${endif}${endif}' >> $CONKYRC_USED;fi
+	if [[ $SELECTION == *ARQUITECTURA* ]] ; then echo ''$MSG_ARCHITECTURE': ${if_match "${texeci 6000000 grep "x86_64" /tmp/architecture.txt -c}" != "0"}64 Bits${else}32 Bits${endif}' >> $CONKYRC_USED;fi
+	#if [[ $SELECTION == *VERSION* ]] ; then echo ''$MSG_VERSION': ${if_existing /usr/share/lliurex-cdd/version}${texeci 10000 cat /usr/share/lliurex-cdd/version}${endif}' >> $CONKYRC_USED;fi
+	if [[ $SELECTION == *VERSION* ]] ; then echo ''$MSG_VERSION':${texeci 60000 lliurex-version -n}' >> $CONKYRC_USED;fi
+	if [[ $SELECTION == *IP_ADDRESS* ]] ;  then echo '$hr${template1 eth0 ETH0}${template1 eth1 ETH1}${template1 eth2 ETH2}${template1 eth3 ETH3}${template1 eth4 ETH4}'>> $CONKYRC_USED;fi
+	echo '$hr' >> $CONKYRC_USED
+	
+	#####LINEA QUE ME SIRVE PARA INDICAR QUE FUE MODIFICADO POR EL USUARIO,SE ANYADE AL INICIO DEL FICHERO
+	sed -i '1s/^/#modified_by_user\n/'  $CONKYRC_USED
+	
+	conky -c $CONKYRC_USED &
+fi
+
+echo "Conky modificado........STARTING IT"
+zero-center set-configured lliurex-conky
+zero-center remove-pulsating-color lliurex-conky
+exit 0
+

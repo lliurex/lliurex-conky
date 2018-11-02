@@ -1,0 +1,356 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-10-05 17:00+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: conkyrc_gui:24
+msgid "LLIUREX CONKY CONFIGURATOR"
+msgstr ""
+
+#: conkyrc_gui:25
+msgid "Do you want conky on desktop?"
+msgstr ""
+
+#: conkyrc_gui:26
+msgid "CONKY CONFIGUTATOR. SELECT THE FORMAT THAT YOU LIKE"
+msgstr ""
+
+#: conkyrc_gui:27
+msgid "<b><big>INFO </big></b>CONKY TEXT: <small>Select your favourite colour or personalice it for INFO</small>"
+msgstr ""
+
+#: conkyrc_gui:28
+msgid "<b><big>TITLE </big></b>CONKY TEXT: <small>Select you favourite colour or personalice it for TITLE</small>"
+msgstr ""
+
+#: conkyrc_gui:29
+msgid "SELECT ONE COLOUR"
+msgstr ""
+
+#: conkyrc_gui:30
+msgid "Select your favourite colour for the: TITLES"
+msgstr ""
+
+#: conkyrc_gui:31
+msgid "Select your favourite colour for the: INFO "
+msgstr ""
+
+#: conkyrc_gui:32
+msgid "SELECT"
+msgstr ""
+
+#: conkyrc_gui:33
+msgid "STYLE"
+msgstr ""
+
+#: conkyrc_gui:34
+msgid "DESCRIPTION"
+msgstr ""
+
+#: conkyrc_gui:35
+msgid "SERVER"
+msgstr ""
+
+#: conkyrc_gui:36
+msgid "Show and monitor, CPU, RAM, NET AND HARD DISK"
+msgstr ""
+
+#: conkyrc_gui:37
+msgid "CLIENT"
+msgstr ""
+
+#: conkyrc_gui:38
+msgid "Show only basic mode, HOSTNAME, ARCHITECTURE, VERSION AND NET ADDRESS"
+msgstr ""
+
+#: conkyrc_gui:39
+msgid ""
+"CONKY CONFIGURATOR, SELECT THE PARAMETERS WHAT YOU WANT TO SEE IN YOUR "
+"DESKTOP:"
+msgstr ""
+
+#: conkyrc_gui:40
+msgid "PARAMETER"
+msgstr ""
+
+#: conkyrc_gui:41
+msgid "USER"
+msgstr ""
+
+#: conkyrc_gui:42
+msgid "User logged to the session in Pc"
+msgstr ""
+
+#: conkyrc_gui:43
+msgid "HOSTNAME"
+msgstr ""
+
+#: conkyrc_gui:44
+msgid "Netname to the Pc"
+msgstr ""
+
+#: conkyrc_gui:45
+msgid "LliureX type client"
+msgstr ""
+
+#: conkyrc_gui:46
+msgid "ARCHITECTURE"
+msgstr ""
+
+#: conkyrc_gui:47
+msgid "Architecture type, 32 or 64 Bits"
+msgstr ""
+
+#: conkyrc_gui:48
+msgid "VERSION"
+msgstr ""
+
+#: conkyrc_gui:49
+msgid "LliureX version installed"
+msgstr ""
+
+#: conkyrc_gui:50 conkyrc_gui:77
+msgid "NET ADDRESS"
+msgstr ""
+
+#: conkyrc_gui:51 conkyrc_gui:78
+msgid "Show Ip address for every netcards connected"
+msgstr ""
+
+#: conkyrc_gui:52
+msgid "MIRROR"
+msgstr ""
+
+#: conkyrc_gui:53
+msgid "LliureX version mirror downloaded"
+msgstr ""
+
+#: conkyrc_gui:54
+msgid "HDD ALERT"
+msgstr ""
+
+#: conkyrc_gui:55
+msgid "Alert to the user, if the hard disk has occuped 91% or more"
+msgstr ""
+
+#: conkyrc_gui:56
+msgid "KERNEL VERSION"
+msgstr ""
+
+#: conkyrc_gui:57
+msgid "kernel version used at the moment"
+msgstr ""
+
+#: conkyrc_gui:58
+msgid "UPTIME"
+msgstr ""
+
+#: conkyrc_gui:59
+msgid "Uptime"
+msgstr ""
+
+#: conkyrc_gui:60
+msgid "how much time has the machine uptime"
+msgstr ""
+
+#: conkyrc_gui:61
+msgid "CPU TYPE"
+msgstr ""
+
+#: conkyrc_gui:62
+msgid "Cpu type installed at the Pc"
+msgstr ""
+
+#: conkyrc_gui:63
+msgid "CPU BAR"
+msgstr ""
+
+#: conkyrc_gui:64
+msgid "Process bar for indicate CPU used in %"
+msgstr ""
+
+#: conkyrc_gui:65
+msgid "CPU GRAPH"
+msgstr ""
+
+#: conkyrc_gui:66
+msgid "Cpu graphic to monitorize it at time"
+msgstr ""
+
+#: conkyrc_gui:67
+msgid "RAM USAGE"
+msgstr ""
+
+#: conkyrc_gui:68
+msgid "RAM Usage"
+msgstr ""
+
+#: conkyrc_gui:69
+msgid "Show how many Ram is installed and how many Ram is used at the moment"
+msgstr ""
+
+#: conkyrc_gui:70
+msgid "RAM BAR"
+msgstr ""
+
+#: conkyrc_gui:71
+msgid "Ram bar to indicate how many it's used at the moment"
+msgstr ""
+
+#: conkyrc_gui:72
+msgid "SWAP USAGE"
+msgstr ""
+
+#: conkyrc_gui:73
+msgid "SWAP Usage"
+msgstr ""
+
+#: conkyrc_gui:74
+msgid "Show how many Swap is installed and how many Swap is used at the moment"
+msgstr ""
+
+#: conkyrc_gui:75
+msgid "SWAP BAR"
+msgstr ""
+
+#: conkyrc_gui:76
+msgid "Swap bar to indicate how many it's used at the moment"
+msgstr ""
+
+#: conkyrc_gui:79
+msgid "NET DOWNLOAD"
+msgstr ""
+
+#: conkyrc_gui:80
+msgid "Show net speed downloading files"
+msgstr ""
+
+#: conkyrc_gui:81
+msgid "NET UPLOAD"
+msgstr ""
+
+#: conkyrc_gui:82
+msgid "Show net speed uploading files"
+msgstr ""
+
+#: conkyrc_gui:83
+msgid "HDD USED"
+msgstr ""
+
+#: conkyrc_gui:84
+msgid "Bar to indicates HDD used"
+msgstr ""
+
+#: conkyrc_gui:85
+msgid "DATA"
+msgstr ""
+
+#: conkyrc_gui:86
+msgid "SYSTEM"
+msgstr ""
+
+#: conkyrc_gui:87
+msgid "HDD"
+msgstr ""
+
+#: conkyrc_gui:88
+msgid "Server"
+msgstr ""
+
+#: conkyrc_gui:89
+msgid "Thin"
+msgstr ""
+
+#: conkyrc_gui:90
+msgid "Heavy"
+msgstr ""
+
+#: conkyrc_gui:91
+msgid "Fat"
+msgstr ""
+
+#: conkyrc_gui:92
+msgid "Desktop"
+msgstr ""
+
+#: conkyrc_gui:93
+msgid "Do you want to change colour fonts or use default mode?"
+msgstr ""
+
+#: conkyrc_gui:94
+msgid "DEFAULT"
+msgstr ""
+
+#: conkyrc_gui:95
+msgid "CHANGE"
+msgstr ""
+
+#: conkyrc_gui:96
+msgid "TIME"
+msgstr ""
+
+#: conkyrc_gui:97
+msgid "You can show the time with this clock in the desktop"
+msgstr ""
+
+#: conkyrc_gui:98
+msgid "DATE"
+msgstr ""
+
+#: conkyrc_gui:99
+msgid "You can show the date in your desktop"
+msgstr ""
+
+#: conkyrc_gui:100
+msgid "TRANSPARENT"
+msgstr ""
+
+#: conkyrc_gui:101
+msgid "You eliminate the shadow in Conky desktop"
+msgstr ""
+
+#: conkyrc_gui:102
+msgid "black"
+msgstr ""
+
+#: conkyrc_gui:103
+msgid "white"
+msgstr ""
+
+#: conkyrc_gui:104
+msgid "cyan"
+msgstr ""
+
+#: conkyrc_gui:105
+msgid "red"
+msgstr ""
+
+#: conkyrc_gui:106
+msgid "green"
+msgstr ""
+
+#: conkyrc_gui:107
+msgid "yellow"
+msgstr ""
+
+#: conkyrc_gui:108
+msgid "purple"
+msgstr ""
+
+#: conkyrc_gui:109
+msgid "Personal colour"
+msgstr ""

@@ -1,0 +1,13 @@
+Name=lliurex-conky
+Name[es]=Configurador del conky
+Name[qcv]=Configuració del conky
+Name[ca_ES]=Configuració del conky
+Comment=Conky gadget for desktop
+Comment[es]=Configurador del gadget conky
+Comment[qcv]=Configuració del gadget conky
+Comment[ca_ES]=Configuració del gadget conky
+Icon=lliurex-conky
+Category=Configuration
+ScriptPath=lliurex-conky.zmd
+Groups=adm;admins;teachers;students
+Using=pe

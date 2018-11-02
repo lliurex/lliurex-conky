@@ -1,0 +1,155 @@
+#!/bin/bash
+
+
+
+#GROUPS_USER=(`groups $USER`)
+FILE_PATH=/usr/share/lliurex-conky
+CONKYRC_ADMIN=$FILE_PATH/conkyrc_admins
+CONKYRC_TEACHERS=$FILE_PATH/conkyrc_teachers
+CONKYRC_STUDENTS=$FILE_PATH/conkyrc_students
+CONKYRC_HOME=/home/$USER
+CONKYRC_USED=$CONKYRC_HOME/.config/lliurex-conky/conkyrc_used
+
+##Comprobación por usuario
+##Abandonada por ahora
+
+#for i in "${GROUPS_USER[@]}"
+#do
+#	echo "Comprueba quien soy con esto: $i"
+#	if [ "$i" == "admin" ]; then
+#		echo "Soy administrador"
+#		conky -c $CONKYRC_ADMIN
+#		break
+#	elif [ "$i" == teachers ]; then
+#		echo "Soy profesor"
+#		conky -c $CONKYRC_TEACHERS
+#		break
+#	elif [ "$i" == students ]; then
+#		echo "Soy alumno"
+#		conky -c $CONKYRC_STUDENTS
+#		break
+#	fi
+#done;
+#echo "No se quien soy"
+#conky -c $CONKYRC_STUDENTS
+
+##Comprobación por máquina
+##Activa Actualmente
+if [[ ! -f /tmp/architecture.txt ]]; then
+	touch /tmp/architecture.txt
+	chmod 777 /tmp/architecture.txt
+fi
+
+uname -m > /tmp/architecture.txt
+
+
+lliurex-version > /tmp/conky-test.txt
+chmod 777 /tmp/conky-test.txt
+
+echo $LTSP_FATCLIENT > /tmp/conky-test-fat.txt
+chmod 777 /tmp/conky-test-fat.txt
+
+
+function conky_version () {
+	
+	
+
+	SERVIDOR=$(grep "server" /tmp/conky-test.txt -c) 
+	#echo "Variable Servidor es $SERVIDOR"
+
+
+
+	if [ "$SERVIDOR" != "0" ]; then
+		Z=$(echo $DISPLAY | cut -d ":" -f 1)
+		#echo "La variable Z es: $Z"
+		if [ -z $Z ]; then
+			echo "Soy un Servidor"
+			conky -c $CONKYRC_ADMIN
+		else
+			echo "Soy un Ligero"
+			conky -c $CONKYRC_STUDENTS
+		fi
+	else
+		CLIENTE=$(grep "client" /tmp/conky-test.txt -c)
+		if [  "$CLIENTE" != "0" ]; then
+			SEMI=$(grep "true" /tmp/conky-test-fat.txt -c)
+			if [  "$SEMI" != "0" ]; then
+				echo "Soy Semiligero"
+				conky -c $CONKYRC_STUDENTS
+			else
+				echo "Soy un Pesado"
+				conky -c $CONKYRC_STUDENTS
+			fi
+		else
+				echo "Soy un Desktop"
+				conky -c $CONKYRC_ADMIN
+		fi
+	fi
+
+}
+
+function conky_mirror () {
+
+	VERSION_32='0'
+	VERSION_64='0'
+	FICHERO='/tmp/mirror_version.txt'
+
+	:> $FICHERO
+	chmod 777 $FICHERO	
+
+	ARQ=$(find /net/mirror/llx16/pool/main/l/lliurex-meta -name '*386.deb' | head -1 )
+	VERSION=$(find /net/mirror/llx16/pool/main/l/lliurex-version-timestamp -name 'lliurex-version-timestamp*.deb' | head -1)
+
+	if [ -n "$ARQ" ]; then 
+	
+			touch $FICHERO
+			NUMERO_32=$(echo $VERSION | cut -d_ -f2 )
+			echo 'VERSION 32 BITS:' $NUMERO_32 >> $FICHERO
+			
+	fi
+
+	ARQ=$(find /net/mirror/llx16/pool/main/l/lliurex-meta -name '*amd64.deb' | head -1)
+	VERSION=$(find /net/mirror/llx16/pool/main/l/lliurex-version-timestamp -name 'lliurex-version-timestamp*.deb' | head -1)
+
+	if [ -n "$ARQ" ]; then 
+			
+			if [ ! -f $FICHERO ]; then
+				touch $FICHERO
+			fi
+			NUMERO_64=$(echo $VERSION | cut -d_ -f2 )
+			echo 'VERSION 64 BITS:' $NUMERO_64 >> $FICHERO
+			
+	fi
+
+}
+
+
+#####PROGRAMA PRINCIPAL###########
+
+##AL INICIO DEL FICHERO DE CONKYRC_USED LLEVARA UNA LINEA QUE NOS INDICA QUE FUE MODIFICADO POSTERIORMENTE
+
+###Compruebo si soy un server y si es asi preparo su fichero de mirror
+SERVIDOR=$(grep "server" /tmp/conky-test.txt -c) 
+if [ "$SERVIDOR" != "0" ]; then
+	Z=$(echo $DISPLAY | cut -d ":" -f 1)
+	#echo "La variable Z es: $Z"
+	if [ -z $Z ]; then
+		#echo "Soy un Servidor"
+		conky_mirror
+	fi
+fi
+
+####Segun si he modificado el conky a mano o no arranco de un modo u otro.
+
+if [[ -f $CONKYRC_USED ]] 
+then
+	echo "Do nothing with $CONKYRC_USED"
+	sleep 15
+	conky -c $CONKYRC_USED
+else
+	sleep 15
+	conky_version
+fi
+			
+
+exit 0

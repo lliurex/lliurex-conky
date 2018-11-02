@@ -1,0 +1,2 @@
+#!/bin/bash
+( ps -aux | grep zenity | grep Conky > /dev/null ) || (zenity --info --title="Conky informa" --text="El disco esta casi lleno."> /dev/null 2>&1) &

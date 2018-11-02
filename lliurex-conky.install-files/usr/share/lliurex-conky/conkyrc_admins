@@ -1,0 +1,163 @@
+#==============================================================================
+## conkyrc admins
+##
+## author : Daniel Duran
+## version : xenial
+## license : Distributed under the terms of GNU GPL version 2 or later
+##
+#==============================================================================
+###  Begin Window Settings  ##################################################
+own_window yes
+own_window_class Conky
+own_window_type dock
+#own_window_transparent yes
+#own_window_colour grey
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+own_window_title LLIUREX_CONKY
+own_window_argb_visual yes
+own_window_argb_value 150
+
+
+# Use the Xdbe extension? (eliminates flicker)
+# It is highly recommended to use own window with this one
+# so double buffer won't be so big.
+double_buffer yes
+
+#minimum_size 600 500 ## width, height
+#maximum_width 600  ## width, usually a good idea to equal minimum width
+
+maximum_width 200
+alignment top_right
+gap_x 10
+gap_y 200
+
+cpu_avg_samples 5
+net_avg_samples 5
+diskio_avg_samples 5
+if_up_strictness address
+
+total_run_times 0
+update_interval 1
+####################################################  End Window Settings  ###
+###  Font Settings  ##########################################################
+# Use Xft (anti-aliased font and stuff)
+use_xft yes
+
+# Alpha of Xft font. Must be a value at or between 1 and 0 ###
+xftalpha 0.6
+# Force UTF8? requires XFT ###
+override_utf8_locale yes
+
+draw_shades no #### <<<<<<------------------To see it easier on light screens.
+#default_shade_color black
+
+draw_outline no #### <<<<<<---------------- Amplifies text if yes
+default_outline_color black
+
+uppercase no
+######################################################  End Font Settings  ###
+###  Color Settings  #########################################################
+#default_shade_color gray
+#default_outline_color black
+
+#default_color DCDCDC #220 220 220	Gainsboro
+#color0 8FBC8F #143 188 143	DarkSeaGreen
+#color1 778899 #119 136 153	LightSlateGray
+#color2 FF8C00 #255 140   0	DarkOrange
+#color3 7FFF00 #127 255   0	Chartreuse
+#color4 FFA07A #255 160 122	LightSalmon
+#color5 FFDEAD #255 222 173	NavajoWhite
+#color6 00BFFF #  0 191 255	DeepSkyBlue
+#color7 00FFFF #  0 255 255	Cyan
+#color8 FFFF00 #255 255   0	Yellow
+#color9 FF0000 #255   0   0	Red
+
+#####################################################  End Color Settings  ###
+###  Borders Section  ########################################################
+draw_borders no
+# Stippled borders?
+stippled_borders 0
+# border margins
+border_inner_margin 5
+border_outer_margin 0
+# border width
+border_width 0
+# graph borders
+draw_graph_borders no
+#####################################################  End Borders Secton  ###
+###  Miscellaneous Section  ##################################################
+
+# Boolean value, if true, Conky will be forked to background when started.
+background yes
+
+# Adds spaces around certain objects to stop them from moving other things
+# around, this only helps if you are using a mono font
+# Options: right, left or none
+use_spacer right
+
+# Default and Minimum size is 256 - needs more for single commands that
+# "call" a lot of text IE: bash scripts
+text_buffer_size 2048
+
+# Subtract (file system) buffers from used memory?
+no_buffers yes
+
+# Temperature unit (default is Celsius)
+temperature_unit fahrenheit
+
+# change GiB to G and MiB to M
+short_units yes
+
+# Like it says, ot pads the decimals on % values
+# doesn't seem to work since v1.7.1
+pad_percents 2
+
+#   Maximum size of user text buffer, i.e. layout below TEXT line in config file
+#  (default is 16384 bytes)
+# max_user_text 16384
+
+##############################################  End Miscellaneous Section  
+
+
+xftfont Debian bold:size=10
+###################
+####  TEMPLATES   ######
+###################
+
+
+
+template1 USED \1: ${fs_used_perc \1}% ${alignr\ 80}${fs_bar\ \1}
+template2 ${\1 name \2}${alignr}${\1 \3 \2} %
+template3 ${if_up \1}${template0 \2}\nIP  ${alignr 9} ${addrs \1}\nDLS:${downspeed \1} kb/s\nULS:${upspeed \1} kb/s$endif
+template4 ${if_up \1}${template0 \2}\ndown $alignr ${downspeed \1}/s\nup $alignr ${upspeed \1}/s\ntotal down$alignr${totaldown \1}\ntotal up $alignr${totalup \1}$endif
+template5 ${if_up \1}${template0 \2}\nIP  ${alignr 9} ${addrs \1}\nDLS:${downspeed \1} kb/s$endif
+template6 ${if_up \1}${template0 \2}\nIP  ${alignr 9} ${addrs \1}\nULS:${upspeed \1} kb/s$endif
+template7 ${if_up \1}${template0 \2}\nIP  ${alignr 9} ${addrs \1}$endif
+template8  MIRROR \1:${exec cat /tmp/mirror_version.txt | grep 'VERSION \1' | cut -d ":" -f2 | xargs}
+template9  MIRROR DUAL:${exec cat /tmp/mirror_version.txt | grep 'VERSION 32' | cut -d ":" -f2 | xargs}
+template0 ${font AvantGardeLTMedium:bold:size=10}${color dodgerblue3}\1 ${hr 2}${color white}${font}${voffset 1}
+TEXT
+${color white}${font}${font AvantGardeLTMedium::size=38}$alignc${time %H:%M}$font${color white}${font AvantGardeLTMedium:size=15}
+$alignc${time %a}, ${time %d %b %Y}$font${color white}
+
+${template0 DATOS}
+USUARIO: $LOGNAME
+EQUIPO: $nodename
+CLIENTE: ${if_match "${texeci 60000 grep "server" /tmp/conky-test.txt -c}" != "0"}${if_empty ${texeci 1000 echo $DISPLAY | cut -d ":" -f 1}}Servidor${else}Ligero${endif}${else}${if_match "${texeci 1000 grep "client" /tmp/conky-test.txt -c}" != "0"}${if_empty ${texeci 1000cat /tmp/conky-test-fat.txt | grep true }}Pesado${else}Semiligero${endif}${else}Escritorio${endif}${endif}
+ARQUITECTURA: ${if_match "${texeci 60000 grep "x86_64" /tmp/architecture.txt -c}" != "0"}64 Bits${else}32 Bits${endif}
+VERSIÓN:${texeci 10000 lliurex-version -n}
+${if_existing /tmp/mirror_version.txt}${if_match ${texeci 60000 grep "VERSION 32" /tmp/mirror_version.txt -c}!=0}${if_match ${texeci 1000 grep "VERSION 64" /tmp/mirror_version.txt -c}!=0}${template9}${else}${template8 32}${endif}${else}${if_match ${texeci 1000 grep "VERSION 64" /tmp/mirror_version.txt -c}!=0}${template8 64}${endif}${endif}${else}NO MIRROR DONE${endif}
+${template0 SISTEMA}
+Kernel $alignr $kernel
+T. encendido $alignr $uptime
+${template0 CPU}
+${texeci 6000000 cat /proc/cpuinfo | grep 'model name' | cut -c 14-42 | uniq }
+$cpu % ${cpubar}
+${template0 RAM}
+Uso de RAM: $memperc% $alignr $memmax
+Uso de SWAP: $swapperc% $alignr $swapmax
+${template7 eth0 ETH0}
+${template7 eth1 ETH1}
+${template0 Disco Duro}
+${if_mounted /}${template1 /}${if_match ${fs_used_perc /}>=91}${texeci 1000 /usr/share/lliurex-conky/hdd_full}${else}${endif}$endif
+${if_mounted /net}${template1 /net}${if_match ${fs_used_perc /net}>=91}${texeci 1000 /usr/share/lliurex-conky/hdd_full_net}${else}${endif}$endif

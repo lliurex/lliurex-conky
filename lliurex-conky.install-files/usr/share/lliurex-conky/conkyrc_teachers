@@ -1,0 +1,101 @@
+#==============================================================================
+## conkyrc students
+##
+## author : Daniel Durán
+## version : v0.5
+## license : Distributed under the terms of GNU GPL version 2 or later
+##
+#==============================================================================
+#if_running clementine}# Use Xft?
+use_xft yes
+#xftfont Trebuchet MS:size=8
+#xftalpha 0.8
+text_buffer_size 2048
+background yes
+# Update interval in seconds
+#update_interval 1
+xftalpha 0.8
+#own_window_argb_visual yes
+# This is the number of times Conky will update before quitting.
+# Set to zero to run forever.
+total_run_times 0
+
+
+# Create own window instead of using desktop (required in nautilus)
+own_window yes
+own_window_transparent yes
+own_window_type override
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+
+
+# Use double buffering (reduces flicker, may not work for everyone)
+double_buffer yes
+# Minimum size of text area
+#minimum_size 180 0
+# Draw shades?
+draw_shades no
+draw_graph_borders no
+
+# Draw outlines?
+draw_outline no
+
+# Draw borders around text
+draw_borders no
+
+# Stippled borders?
+stippled_borders 0
+
+# border margins
+#border_margin 5
+
+# border width
+border_width 1
+
+
+# Default colors and also border colors
+#default_color white
+# own_window_colour white
+
+
+# Subtract file system buffers from used memory?
+no_buffers yes
+
+
+# set to yes if you want all text to be in uppercase
+uppercase no
+
+
+# number of cpu samples to average
+# set to 1 to disable averaging
+#cpu_avg_samples 2
+# number of net samples to average
+# set to 1 to disable averaging
+#net_avg_samples 2
+# Force UTF8? note that UTF8 support required XFT
+override_utf8_locale yes
+
+
+# Add spaces to keep things from moving about? This only affects certain objects.
+use_spacer none
+
+
+gap_x 30
+gap_y 250
+#Change by DGTI
+#gap_y 160
+#maximum_width 200
+alignment bottom_right
+default_color white 
+
+
+template1 ${if_up \1}\n IP \2:$alignr ${addrs \1}$endif
+
+TEXT
+$hr
+  USUARIO: $LOGNAME
+  EQUIPO: $nodename
+  CLIENTE:${exec lliurex-version > /tmp/test.txt}${if_match ${exec grep "server" /tmp/test.txt -c}!=0}${if_empty ${exec echo $DISPLAY | cut -d ":" -f 1}}Servidor${else}Ligero${endif}${else}${if_match ${exec grep "client" /tmp/test.txt -c}!=0}${if_match ${exec echo $LTSP_FATCLIENT | grep "true"}=0}Pesado${else}Semiligero${endif}${else}Desktop${endif}${endif}
+  VERSION: ${exec cat /usr/share/lliurex-cdd/version}
+  ARQUITECTURA: ${exec uname -m > /tmp/architecture.txt}${if_match ${exec grep "x86_64" /tmp/architecture.txt -c}!=0}64 Bits${else}32 Bits${endif}
+$hr${template1 eth0 ETH0}${template1 eth1 ETH1}${template1 eth2 ETH2}${template1 eth3 ETH3}${template1 eth4 ETH4}
+$hr

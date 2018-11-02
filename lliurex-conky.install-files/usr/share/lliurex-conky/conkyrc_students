@@ -1,0 +1,124 @@
+#==============================================================================
+## conkyrc students
+##
+## author : Daniel Durán
+## version : xenial
+## license : Distributed under the terms of GNU GPL version 2 or later
+##
+#==============================================================================
+###  Begin Window Settings  ##################################################
+own_window yes
+own_window_class Conky
+own_window_type dock
+own_window_transparent yes
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+own_window_title LLIUREX_CONKY
+
+# Use the Xdbe extension? (eliminates flicker)
+# It is highly recommended to use own window with this one
+# so double buffer won't be so big.
+double_buffer yes
+
+#minimum_size 600 500 ## width, height
+#maximum_width 600  ## width, usually a good idea to equal minimum width
+
+gap_x 30 ### left &right
+gap_y 0 ### up & down
+
+alignment middle_right
+total_run_times 0
+update_interval 1
+####################################################  End Window Settings  ###
+###  Font Settings  ##########################################################
+# Use Xft (anti-aliased font and stuff)
+use_xft yes
+
+# Alpha of Xft font. Must be a value at or between 1 and 0 ###
+xftalpha 0.8
+# Force UTF8? requires XFT ###
+override_utf8_locale yes
+
+draw_shades no #### <<<<<<------------------To see it easier on light screens.
+#default_shade_color black
+
+draw_outline no #### <<<<<<---------------- Amplifies text if yes
+default_outline_color black
+
+uppercase no
+######################################################  End Font Settings  ###
+###  Color Settings  #########################################################
+#default_shade_color gray
+#default_outline_color black
+
+#default_color DCDCDC #220 220 220	Gainsboro
+#color0 8FBC8F #143 188 143	DarkSeaGreen
+#color1 778899 #119 136 153	LightSlateGray
+#color2 FF8C00 #255 140   0	DarkOrange
+#color3 7FFF00 #127 255   0	Chartreuse
+#color4 FFA07A #255 160 122	LightSalmon
+#color5 FFDEAD #255 222 173	NavajoWhite
+#color6 00BFFF #  0 191 255	DeepSkyBlue
+#color7 00FFFF #  0 255 255	Cyan
+#color8 FFFF00 #255 255   0	Yellow
+#color9 FF0000 #255   0   0	Red
+
+default_color white 
+font AvantGardeLTMedium:bold:size=12
+#####################################################  End Color Settings  ###
+###  Borders Section  ########################################################
+draw_borders no
+# Stippled borders?
+stippled_borders 0
+# border margins
+border_inner_margin 5
+border_outer_margin 0
+# border width
+border_width 0
+# graph borders
+draw_graph_borders no
+#####################################################  End Borders Secton  ###
+###  Miscellaneous Section  ##################################################
+
+# Boolean value, if true, Conky will be forked to background when started.
+background no
+
+# Adds spaces around certain objects to stop them from moving other things
+# around, this only helps if you are using a mono font
+# Options: right, left or none
+use_spacer right
+
+# Default and Minimum size is 256 - needs more for single commands that
+# "call" a lot of text IE: bash scripts
+text_buffer_size 2048
+
+# Subtract (file system) buffers from used memory?
+no_buffers yes
+
+# Temperature unit (default is Celsius)
+temperature_unit fahrenheit
+
+# change GiB to G and MiB to M
+short_units yes
+
+# Like it says, ot pads the decimals on % values
+# doesn't seem to work since v1.7.1
+pad_percents 2
+
+#   Maximum size of user text buffer, i.e. layout below TEXT line in config file
+#  (default is 16384 bytes)
+# max_user_text 16384
+
+##############################################  End Miscellaneous Section  
+
+
+template1 ${if_up \1}\n IP \2:$alignr ${addrs \1}$endif
+
+TEXT
+$hr
+  USUARIO: $LOGNAME
+  EQUIPO: $nodename 
+  CLIENTE:${if_match "${texeci 6000000 grep "server" /tmp/conky-test.txt -c}" != "0"}${if_empty ${texeci 1000 echo $DISPLAY | cut -d ":" -f 1}}Servidor${else}Ligero${endif}${else}${if_match "${texeci 1000 grep "client" /tmp/conky-test.txt -c}" != "0"}${if_empty ${texeci 1000 cat /tmp/conky-test-fat.txt | grep true }}Pesado${else}Semiligero${endif}${else}Desktop${endif}${endif}
+  VERSION: ${texeci 60000 lliurex-version -n}
+  ARQUITECTURA: ${if_match "${texeci 6000000 grep "x86_64" /tmp/architecture.txt -c}" != "0"}64 Bits${else}32 Bits${endif}
+$hr${template1 eth0 ETH0}${template1 enp0s8 ETH1}${template1 eth2 ETH2}${template1 eth3 ETH3}${template1 eth4 ETH4}
+$hr

@@ -1,0 +1,379 @@
+# Spanish translations for PACKAGE package.
+# Copyright (C) 2012 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Daniel Durán Vecino <daduve@gmail.com>, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-10-05 17:00+0200\n"
+"PO-Revision-Date: 2015-11-25 12:41+0200\n"
+"Last-Translator: Juan Ramon Pelegrina <juapesai@hotmail.com>\n"
+"Language-Team: Spanish\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: conkyrc_gui:24
+msgid "LLIUREX CONKY CONFIGURATOR"
+msgstr ""
+
+#: conkyrc_gui:25
+msgid "Do you want conky on desktop?"
+msgstr "¿Quieres que conky sea visible?"
+
+#: conkyrc_gui:26
+msgid "CONKY CONFIGUTATOR. SELECT THE FORMAT THAT YOU LIKE"
+msgstr "CONFIGURADOR DE CONKY, SELECCIONA EL FORMATO QUE MAS TE GUSTE"
+
+#: conkyrc_gui:27
+msgid "<b><big>INFO </big></b>CONKY TEXT: <small>Select your favourite colour or personalice it for INFO</small>"
+msgstr "<b><big>INFO </big></b>CONKY TEXT: <small>Selecciona tu color favorito o personalízalo para la DESCRIPCIÓN</small>"
+
+#: conkyrc_gui:28
+msgid "<b><big>TITLE </big></b>CONKY TEXT: <small>Select you favourite colour or personalice it for TITLE</small>"
+msgstr "<b><big>TITLE </big></b>CONKY TEXT: <small>Selecciona tu color favorito o personalízalo para el TÍTULO</small>"
+
+#: conkyrc_gui:29
+msgid "SELECT ONE COLOUR"
+msgstr "SELECCIONA UN COLOR"
+
+#: conkyrc_gui:30
+msgid "Select your favourite colour for the: TITLES"
+msgstr "Selecciona tu color favorito para el: TÍTULO"
+
+#: conkyrc_gui:31
+msgid "Select your favourite colour for the: INFO "
+msgstr "Selecciona tu color favorito para la: DESCRIPCIÓN"
+
+#: conkyrc_gui:32
+msgid "SELECT"
+msgstr "SELECCIONA"
+
+#: conkyrc_gui:33
+msgid "STYLE"
+msgstr "ESTILO"
+
+#: conkyrc_gui:34
+msgid "DESCRIPTION"
+msgstr "DESCRIPCIÓN"
+
+#: conkyrc_gui:35
+msgid "SERVER"
+msgstr "SERVIDOR"
+
+#: conkyrc_gui:36
+msgid "Show and monitor, CPU, RAM, NET AND HARD DISK"
+msgstr "Muestra parámetros y monitoriza la CPU, RAM, RED y DISCO DURO"
+
+#: conkyrc_gui:37
+msgid "CLIENT"
+msgstr "CLIENTE"
+
+#: conkyrc_gui:38
+msgid "Show only basic mode, HOSTNAME, ARCHITECTURE, VERSION AND NET ADDRESS"
+msgstr ""
+"Muestra sólo el modo básico, EQUIPO, ARQUITECTURA, VERSIÓN Y DIRECCIONES DE "
+"RED"
+
+#: conkyrc_gui:39
+msgid ""
+"CONKY CONFIGURATOR, SELECT THE PARAMETERS WHAT YOU WANT TO SEE IN YOUR "
+"DESKTOP:"
+msgstr ""
+"CONFIGURADOR DE CONKY, SELECCIONA LOS PARÁMETROS QUE QUIERES QUE SEAN "
+"VISIBLES:"
+
+#: conkyrc_gui:40
+msgid "PARAMETER"
+msgstr "PARÁMETRO"
+
+#: conkyrc_gui:41
+msgid "USER"
+msgstr "USUARIO"
+
+#: conkyrc_gui:42
+msgid "User logged to the session in Pc"
+msgstr "Usuario logado al equipo"
+
+#: conkyrc_gui:43
+msgid "HOSTNAME"
+msgstr "EQUIPO"
+
+#: conkyrc_gui:44
+msgid "Netname to the Pc"
+msgstr "Nombre del equipo en la red"
+
+#: conkyrc_gui:45
+msgid "LliureX type client"
+msgstr "Tipo de cliente LliureX"
+
+#: conkyrc_gui:46
+msgid "ARCHITECTURE"
+msgstr "ARQUITECTURA"
+
+#: conkyrc_gui:47
+msgid "Architecture type, 32 or 64 Bits"
+msgstr "Tipo de arquitectura, 32 o 64 Bits"
+
+#: conkyrc_gui:48
+msgid "VERSION"
+msgstr "VERSIÓN"
+
+#: conkyrc_gui:49
+msgid "LliureX version installed"
+msgstr "Número de versión Lliurex instalada"
+
+#: conkyrc_gui:50 conkyrc_gui:77
+msgid "NET ADDRESS"
+msgstr "DIRECCIÓN DE RED"
+
+#: conkyrc_gui:51 conkyrc_gui:78
+msgid "Show Ip address for every netcards connected"
+msgstr "Nos muestra la IP de cada tarjeta de red"
+
+#: conkyrc_gui:52
+msgid "MIRROR"
+msgstr "MIRROR"
+
+#: conkyrc_gui:53
+msgid "LliureX version mirror downloaded"
+msgstr "Versión del mirror de LliureX descargada"
+
+#: conkyrc_gui:54
+msgid "HDD ALERT"
+msgstr "ALERTA DE HDD"
+
+#: conkyrc_gui:55
+msgid "Alert to the user, if the hard disk has occuped 91% or more"
+msgstr ""
+"Si nuestro disco de sistema alcanza el 91% o más, sale un mensaje de alerta."
+
+#: conkyrc_gui:56
+msgid "KERNEL VERSION"
+msgstr "VERSIÓN DE KERNEL"
+
+#: conkyrc_gui:57
+msgid "kernel version used at the moment"
+msgstr "Versión de Kernel usada actualmente"
+
+#: conkyrc_gui:58
+msgid "UPTIME"
+msgstr "TIEMPO ENCENDIDA"
+
+#: conkyrc_gui:59
+msgid "Uptime"
+msgstr "T. encendido"
+
+#: conkyrc_gui:60
+msgid "how much time has the machine uptime"
+msgstr "Tiempo que lleva la máquina encendida sin reiniciar"
+
+#: conkyrc_gui:61
+msgid "CPU TYPE"
+msgstr "CPU TIPO"
+
+#: conkyrc_gui:62
+msgid "Cpu type installed at the Pc"
+msgstr "Tipo de procesador instalado en el Pc"
+
+#: conkyrc_gui:63
+msgid "CPU BAR"
+msgstr "USO DE CPU"
+
+#: conkyrc_gui:64
+msgid "Process bar for indicate CPU used in %"
+msgstr "Barra que indica el tanto por cien de uso de CPU"
+
+#: conkyrc_gui:65
+msgid "CPU GRAPH"
+msgstr "GRÁFICA DE CPU"
+
+#: conkyrc_gui:66
+msgid "Cpu graphic to monitorize it at time"
+msgstr "Gráfica que muestra el uso de CPU en el tiempo"
+
+#: conkyrc_gui:67
+msgid "RAM USAGE"
+msgstr "USO DE RAM"
+
+#: conkyrc_gui:68
+msgid "RAM Usage"
+msgstr "Uso de RAM"
+
+#: conkyrc_gui:69
+msgid "Show how many Ram is installed and how many Ram is used at the moment"
+msgstr ""
+"Indica la cantidad de Ram que tenemos y cuanta esta ahora mismo ocupada"
+
+#: conkyrc_gui:70
+msgid "RAM BAR"
+msgstr "GRÁFICA DE RAM"
+
+#: conkyrc_gui:71
+msgid "Ram bar to indicate how many it's used at the moment"
+msgstr "Barra que indica el tanto por cien de uso de RAM"
+
+#: conkyrc_gui:72
+msgid "SWAP USAGE"
+msgstr "USO DE SWAP"
+
+#: conkyrc_gui:73
+msgid "SWAP Usage"
+msgstr "Uso de SWAP"
+
+#: conkyrc_gui:74
+msgid "Show how many Swap is installed and how many Swap is used at the moment"
+msgstr ""
+"Indica la cantidad de memória de intercambio (Swap) que tenemos y cuanta "
+"esta ahora mismo ocupada"
+
+#: conkyrc_gui:75
+msgid "SWAP BAR"
+msgstr "GRAFICA DE SWAP"
+
+#: conkyrc_gui:76
+msgid "Swap bar to indicate how many it's used at the moment"
+msgstr "Barra que indica el tanto por cien de uso de memória de intercambio"
+
+#: conkyrc_gui:79
+msgid "NET DOWNLOAD"
+msgstr "VELOCIDAD DE DESCARGA"
+
+#: conkyrc_gui:80
+msgid "Show net speed downloading files"
+msgstr "Nos muestra la velocidad de red en la descarga de archivos"
+
+#: conkyrc_gui:81
+msgid "NET UPLOAD"
+msgstr "VELOCIDAD DE SUBIDA"
+
+#: conkyrc_gui:82
+msgid "Show net speed uploading files"
+msgstr "Nos muestra la velocidad de red en la subida de archivos"
+
+#: conkyrc_gui:83
+msgid "HDD USED"
+msgstr "USO DE DISCO DURO"
+
+#: conkyrc_gui:84
+msgid "Bar to indicates HDD used"
+msgstr "Gráfica que nos muestra el uso de disco duro"
+
+#: conkyrc_gui:85
+msgid "DATA"
+msgstr "DATOS"
+
+#: conkyrc_gui:86
+msgid "SYSTEM"
+msgstr "SISTEMA"
+
+#: conkyrc_gui:87
+msgid "HDD"
+msgstr "Disco Duro"
+
+#: conkyrc_gui:88
+msgid "Server"
+msgstr "Servidor"
+
+#: conkyrc_gui:89
+msgid "Thin"
+msgstr "Ligero"
+
+#: conkyrc_gui:90
+msgid "Heavy"
+msgstr "Pesado"
+
+#: conkyrc_gui:91
+msgid "Fat"
+msgstr "Semiligero"
+
+#: conkyrc_gui:92
+msgid "Desktop"
+msgstr "Escritorio"
+
+#: conkyrc_gui:93
+msgid "Do you want to change colour fonts or use default mode?"
+msgstr "¿Quieres cambiar el color de las fuentes o utilizar el modo por defecto?"
+
+#: conkyrc_gui:94
+msgid "DEFAULT"
+msgstr "Por defecto"
+
+#: conkyrc_gui:95
+msgid "CHANGE"
+msgstr "Cambiar"
+
+#: conkyrc_gui:96
+msgid "TIME"
+msgstr "HORA"
+
+#: conkyrc_gui:97
+msgid "You can show the time with this clock in the desktop"
+msgstr "Puedes mostrar la hora con este reloj en el escritorio"
+
+#: conkyrc_gui:98
+msgid "DATE"
+msgstr "FECHA"
+
+#: conkyrc_gui:99
+msgid "You can show the date in your desktop"
+msgstr "Puedes mostrar la fecha en tu escritorio"
+
+#: conkyrc_gui:100
+msgid "TRANSPARENT"
+msgstr "TRANSPARENTE"
+
+#: conkyrc_gui:101
+msgid "You eliminate the shadow in Conky desktop"
+msgstr "Has eliminado la sombra en el escritorio de Conky"
+
+#: conkyrc_gui:102
+msgid "black"
+msgstr "negro"
+
+#: conkyrc_gui:103
+msgid "white"
+msgstr "blanco"
+
+#: conkyrc_gui:104
+msgid "cyan"
+msgstr "cian"
+
+#: conkyrc_gui:105
+msgid "red"
+msgstr "rojo"
+
+#: conkyrc_gui:106
+msgid "green"
+msgstr "verde"
+
+#: conkyrc_gui:107
+msgid "yellow"
+msgstr "amarillo"
+
+#: conkyrc_gui:108
+msgid "purple"
+msgstr "púrpura"
+
+#: conkyrc_gui:109
+msgid "Personal colour"
+msgstr "Color personalizado"
+
+#~ msgid "ESTILO"
+#~ msgstr "ESTILO"
+
+#~ msgid "DATOS"
+#~ msgstr "DATOS"
+
+#~ msgid "Pesado"
+#~ msgstr "Pesado"
+
+#~ msgid "Ligero"
+#~ msgstr "Ligero"
+
+#~ msgid "Semiligero"
+#~ msgstr "Semiligero"
