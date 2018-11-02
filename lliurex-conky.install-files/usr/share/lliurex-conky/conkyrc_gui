@@ -8,7 +8,7 @@ CONKYRC_ADMIN=$FILE_PATH/conkyrc_admins
 CONKYRC_ADMIN_BASE=$FILE_PATH/conkyrc_admins_base
 CONKYRC_STUDENTS=$FILE_PATH/conkyrc_students
 CONKYRC_STUDENTS_BASE=$FILE_PATH/conkyrc_students_base
-#CONKYRC_USED=$FILE_PATH/conkyrc_used
+USER=$(getent passwd | grep x:$PKEXEC_UID: | cut -d ":" -f 1)
 CONKYRC_HOME=/home/$USER
 CONKYRC_USED=$CONKYRC_HOME/.config/lliurex-conky/conkyrc_used
 
@@ -20,6 +20,10 @@ SELECTION_COLOUR2_DEFECT="dodgerblue3"
 READED=TRUE
 
 SELECTION2=STUDENT
+CANCEL_COLOR_PERS=0
+CANCEL_COLOR_PERS2=0
+
+
 
 #########Variables para las traducciones############
 export TEXTDOMAIN="lliurex-conky"
@@ -196,15 +200,27 @@ echo "Utilizare el script de $SOY"
 
 function cancelar () {
 
-	if [[ $1 -eq 1 ]] ; then
-			#Contesto que no quiere que sea visible
-			echo "No sera visible, se ha cancelado el proceso"
-			:> $CONKYRC_USED
-			echo '#modified_by_user' >> $CONKYRC_USED
-			zero-center set-non-configured lliurex-conky
-			zero-center remove-pulsating-color lliurex-conky
-			exit 0
-	fi
+	echo $2
+	echo $SOY
+
+	if [[ "$2" == "" ]];then
+		
+		if [[ "$1" = "1" ]] ; then
+				#Contesto que no quiere que sea visible
+				echo "No sera visible, se ha cancelado el proceso"
+				:> $CONKYRC_USED
+				echo '#modified_by_user' >> $CONKYRC_USED
+				zero-center set-non-configured lliurex-conky
+				zero-center remove-pulsating-color lliurex-conky
+				exit 0
+		fi
+	else
+		if [[ "$2" == "1" ]];then
+			CANCEL_COLOR_PERS=1
+		else	
+			CANCEL_COLOR_PERS2=1
+		fi		
+	fi	
 
 }
 
@@ -298,12 +314,17 @@ function text_colour_client {
 	#SE QUIERE COLOR PERSONALIZADO
 	if [[  $? -eq  1 ]]; then
 		SELECTION_COLOUR=`zenity --title "$MSG_SELECT_COLOUR_PERSONAL2" --color-selection --show-palette `
-		cancelar $?
-		COL1=$( echo "$SELECTION_COLOUR" | cut -d "," -f1 | cut -d "(" -f2 )
-		COL2=$( echo "$SELECTION_COLOUR" | cut -d "," -f2 )
-		COL3=$( echo "$SELECTION_COLOUR" | cut -d "," -f3 | cut -d ")" -f2 )
-		SELECTION_COLOUR=$( hexcolor COL1 COL2 COL3 )
-		SELECTION_COLOUR=$( echo "$SELECTION_COLOUR" | cut -d "#" -f2 )
+		cancelar $? "1"
+		
+		if [ $CANCEL_COLOR_PERS == "0" ];then
+			COL1=$( echo "$SELECTION_COLOUR" | cut -d "," -f1 | cut -d "(" -f2 )
+			COL2=$( echo "$SELECTION_COLOUR" | cut -d "," -f2 )
+			COL3=$( echo "$SELECTION_COLOUR" | cut -d "," -f3 | cut -d ")" -f2 )
+			SELECTION_COLOUR=$( hexcolor COL1 COL2 COL3 )
+			SELECTION_COLOUR=$( echo "$SELECTION_COLOUR" | cut -d "#" -f2 )
+		else
+			SELECTION_COLOUR="$SELECTION_COLOUR_DEFECT"	
+		fi	
 	fi
 }
 
@@ -333,12 +354,18 @@ function text_colour_server {
 	#SE QUIERE COLOR PERSONALIZADO
 	if [[  $? -eq  1 ]]; then
 		SELECTION_COLOUR2=`zenity --title "$MSG_SELECT_COLOUR_PERSONAL" --color-selection --show-palette `
-		cancelar $?
-		COL1=$( echo "$SELECTION_COLOUR2" | cut -d "," -f1 | cut -d "(" -f2 )
-		COL2=$( echo "$SELECTION_COLOUR2" | cut -d "," -f2 )
-		COL3=$( echo "$SELECTION_COLOUR2" | cut -d "," -f3 | cut -d ")" -f2 )
-		SELECTION_COLOUR2=$( hexcolor COL1 COL2 COL3 )
-		SELECTION_COLOUR2=$( echo "$SELECTION_COLOUR2" | cut -d "#" -f2 )
+		cancelar $? "2"
+		if [ $CANCEL_COLOR_PERS2 == "0" ];then
+			COL1=$( echo "$SELECTION_COLOUR2" | cut -d "," -f1 | cut -d "(" -f2 )
+			COL2=$( echo "$SELECTION_COLOUR2" | cut -d "," -f2 )
+			COL3=$( echo "$SELECTION_COLOUR2" | cut -d "," -f3 | cut -d ")" -f2 )
+			SELECTION_COLOUR2=$( hexcolor COL1 COL2 COL3 )
+			SELECTION_COLOUR2=$( echo "$SELECTION_COLOUR2" | cut -d "#" -f2 )
+		else
+			echo "###########COLOR POR DEFECTO 2###########"
+			SELECTION_COLOUR2="$SELECTION_COLOUR2_DEFECT"	
+			echo $SELECTION_COLOUR2
+		fi	
 	fi
 		
 	
@@ -354,13 +381,19 @@ function text_colour_server {
 	#SE QUIERE COLOR PERSONALIZADO
 	if [[  $? -eq  1 ]]; then
 		SELECTION_COLOUR=`zenity --title "$MSG_SELECT_COLOUR_PERSONAL2" --color-selection --show-palette `
-		cancelar $?
-		COL1=$( echo "$SELECTION_COLOUR" | cut -d "," -f1 | cut -d "(" -f2 )
-		COL2=$( echo "$SELECTION_COLOUR" | cut -d "," -f2 )
-		COL3=$( echo "$SELECTION_COLOUR" | cut -d "," -f3 | cut -d ")" -f2 )
-		SELECTION_COLOUR=$( hexcolor COL1 COL2 COL3 )
-		SELECTION_COLOUR=$( echo "$SELECTION_COLOUR" | cut -d "#" -f2 )
-		
+		cancelar $? "1"
+		if [ $CANCEL_COLOR_PERS == "0" ];then
+			COL1=$( echo "$SELECTION_COLOUR" | cut -d "," -f1 | cut -d "(" -f2 )
+			COL2=$( echo "$SELECTION_COLOUR" | cut -d "," -f2 )
+			COL3=$( echo "$SELECTION_COLOUR" | cut -d "," -f3 | cut -d ")" -f2 )
+			SELECTION_COLOUR=$( hexcolor COL1 COL2 COL3 )
+			SELECTION_COLOUR=$( echo "$SELECTION_COLOUR" | cut -d "#" -f2 )
+
+		else
+			echo "##########COLOR POR DEFECTO"
+			SELECTION_COLOUR="$SELECTION_COLOUR_DEFECT"	
+			echo $SELECTION_COLOUR
+		fi
 	fi
 }
 
@@ -430,7 +463,7 @@ if [[ $SOY != "CLIENTE" ]]; then
 		
 	####DATOS INICIALES####
 	if [[ $SELECTION == *USUARIO* ]] || [[ $SELECTION == *EQUIPO* ]] || [[ $SELECTION == *CLIENTE* ]] || [[ $SELECTION == *ARQUITECTURA* ]] || [[ $SELECTION == *VERSION* ]] ;  then echo '${template0 '$MSG_DATOS_PANEL'}' >> $CONKYRC_USED;fi
-	if [[ $SELECTION == *USUARIO* ]] ; then echo ''$MSG_USER': $LOGNAME' >> $CONKYRC_USED;fi
+	if [[ $SELECTION == *USUARIO* ]] ; then echo ''$MSG_USER': $USER' >> $CONKYRC_USED;fi
 	if [[ $SELECTION == *EQUIPO* ]] ; then echo ''$MSG_HOSTNAME': $nodename' >> $CONKYRC_USED;fi
 	if [[ $SELECTION == *CLIENTE* ]] ; then echo ''$MSG_CLIENT': ${if_match "${texeci 6000000 grep "server" /tmp/conky-test.txt -c}" != "0"}${if_empty ${texeci 1000 echo $DISPLAY | cut -d ":" -f 1}}'$MSG_SERVER_PANEL'${else}'$MSG_LIGERO_PANEL'${endif}${else}${if_match "${texeci 1000 grep "client" /tmp/conky-test.txt -c}" != "0"}${if_empty ${texeci 1000 cat /tmp/conky-test-fat.txt | grep true }}'$MSG_PESADO_PANEL'${else}'$MSG_SEMILIGERO_PANEL'${endif}${else}'$MSG_DESKTOP_PANEL'${endif}${endif}' >> $CONKYRC_USED;fi
 	if [[ $SELECTION == *ARQUITECTURA* ]] ; then echo ''$MSG_ARCHITECTURE': ${if_match "${texeci 6000000 grep "x86_64" /tmp/architecture.txt -c}" != "0"}64 Bits${else}32 Bits${endif}' >> $CONKYRC_USED;fi
@@ -493,11 +526,11 @@ if [[ $SOY != "CLIENTE" ]]; then
 	fi
 	####HDD####
 	
-	if [[ $SELECTION == *HDD* ]]  &&  [[ $SELECTION == *HDD_ALERT* ]] ; then echo '${template0 '$MSG_HDD_PANEL'}' >> $CONKYRC_USED; echo '${if_mounted /}${template1 /}${if_match ${fs_used_perc /}>=91}${texeci 1000 /usr/share/lliurex-conky/hdd_full}${else}${endif}$endif' >> $CONKYRC_USED;  echo '${if_mounted /net}${template1 /net}${if_match ${fs_used_perc /net}>=91}${texeci 1000 /usr/share/lliurex-conky/hdd_full_net}${else}${endif}$endif' >> $CONKYRC_USED;fi
+	if [[ $SELECTION == *HDD_USED* ]]  &&  [[ $SELECTION == *HDD_ALERT* ]] ; then echo '${template0 '$MSG_HDD_PANEL'}' >> $CONKYRC_USED; echo '${if_mounted /}${template1 /}${if_match ${fs_used_perc /}>=91}${texeci 1000 /usr/share/lliurex-conky/hdd_full}${else}${endif}$endif' >> $CONKYRC_USED;  echo '${if_mounted /net}${template1 /net}${if_match ${fs_used_perc /net}>=91}${texeci 1000 /usr/share/lliurex-conky/hdd_full_net}${else}${endif}$endif' >> $CONKYRC_USED;fi
 
-	if [[ $SELECTION == *HDD* ]]  &&  [[ $SELECTION != *HDD_ALERT* ]] ; then echo '${template0 '$MSG_HDD_PANEL'}' >> $CONKYRC_USED; echo '${if_mounted /}${template1 /}$endif' >> $CONKYRC_USED; echo '${if_mounted /net}${template1 /net}$endif' >> $CONKYRC_USED; fi
+	if [[ $SELECTION == *HDD_USED* ]]  &&  [[ $SELECTION != *HDD_ALERT* ]] ; then echo '${template0 '$MSG_HDD_PANEL'}' >> $CONKYRC_USED; echo '${if_mounted /}${template1 /}$endif' >> $CONKYRC_USED; echo '${if_mounted /net}${template1 /net}$endif' >> $CONKYRC_USED; fi
 	
-	if [[ $SELECTION != *HDD* ]]  &&  [[ $SELECTION == *HDD_ALERT* ]] ; then echo '${if_mounted /}${if_match ${fs_used_perc /}>=91}${texeci 1000 /usr/share/lliurex-conky/hdd_full}${else}${endif}$endif' >> $CONKYRC_USED;  echo '${if_mounted /net}${if_match ${fs_used_perc /net}>=91}${texeci 1000 /usr/share/lliurex-conky/hdd_full_net}${else}${endif}$endif' >> $CONKYRC_USED;fi
+	if [[ $SELECTION != *HDD_USED* ]]  &&  [[ $SELECTION == *HDD_ALERT* ]] ; then echo '${if_mounted /}${if_match ${fs_used_perc /}>=91}${texeci 1000 /usr/share/lliurex-conky/hdd_full}${else}${endif}$endif' >> $CONKYRC_USED;  echo '${if_mounted /net}${if_match ${fs_used_perc /net}>=91}${texeci 1000 /usr/share/lliurex-conky/hdd_full_net}${else}${endif}$endif' >> $CONKYRC_USED;fi
 	#####LINEA QUE ME SIRVE PARA INDICAR QUE FUE MODIFICADO POR EL USUARIO, SE ANYADE AL INICIO DEL FICHERO
 	sed -i '1s/^/#modified_by_user\n/'  $CONKYRC_USED
 	
@@ -521,7 +554,7 @@ else
 	echo '$hr' >> $CONKYRC_USED
 	
 	####DATOS INICIALES####
-	if [[ $SELECTION == *USUARIO* ]] ; then echo ''$MSG_USER': $LOGNAME' >> $CONKYRC_USED;fi
+	if [[ $SELECTION == *USUARIO* ]] ; then echo ''$MSG_USER': $USER' >> $CONKYRC_USED;fi
 	if [[ $SELECTION == *EQUIPO* ]] ; then echo ''$MSG_HOSTNAME': $nodename' >> $CONKYRC_USED;fi
 	if [[ $SELECTION == *CLIENTE* ]] ; then echo ''$MSG_CLIENT': ${if_match "${texeci 6000000 grep "server" /tmp/conky-test.txt -c}" != "0"}${if_empty ${texeci 1000 echo $DISPLAY | cut -d ":" -f 1}}'$MSG_SERVER_PANEL'${else}'$MSG_LIGERO_PANEL'${endif}${else}${if_match "${texeci 1000 grep "client" /tmp/conky-test.txt -c}" != "0"}${if_empty ${texeci 1000 cat /tmp/conky-test-fat.txt | grep true }}'$MSG_PESADO_PANEL'${else}'$MSG_SEMILIGERO_PANEL'${endif}${else}'$MSG_DESKTOP_PANEL'${endif}${endif}' >> $CONKYRC_USED;fi
 	if [[ $SELECTION == *ARQUITECTURA* ]] ; then echo ''$MSG_ARCHITECTURE': ${if_match "${texeci 6000000 grep "x86_64" /tmp/architecture.txt -c}" != "0"}64 Bits${else}32 Bits${endif}' >> $CONKYRC_USED;fi

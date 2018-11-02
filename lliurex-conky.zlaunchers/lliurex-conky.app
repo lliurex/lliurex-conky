@@ -10,4 +10,4 @@ Icon=lliurex-conky
 Category=Configuration
 ScriptPath=lliurex-conky.zmd
 Groups=adm;admins;teachers;students
-Using=pe
+Using=pkexec
