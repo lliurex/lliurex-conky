@@ -491,7 +491,9 @@ if [[ $SOY != "CLIENTE" ]]; then
 	####NETWORK####
 	if [[ $SELECTION == *IP_ADDRESS* ]] && [[ $SELECTION == *NET_DOWNLOAD* ]] && [[ $SELECTION == *NET_UPLOAD* ]] ;  then 
 		index=0
-		for i in $( ifconfig | grep 'Ethernet' | grep -v ':42' | awk '{print $1}' );
+		#for i in $( ifconfig | grep 'Ethernet' | grep -v ':42' | awk '{print $1}' );
+		#for i in $( ls /sys/class/net | grep "eth");
+		for i in $(ip address | awk '{print $2}' | grep "eth" | sed 's/:.*//')
 		do
 			NET_TITLE=$( echo "$i" | tr '[:lower:]' '[:upper:]' )
 			echo '${template3 '$i' '$NET_TITLE'}${template4 wlan'$index' WLAN'$index'}' >> $CONKYRC_USED;
@@ -500,7 +502,9 @@ if [[ $SOY != "CLIENTE" ]]; then
 	
 	elif [[ $SELECTION == *NET_DOWNLOAD* ]] ;  then
 		index=0
-		for i in $( ifconfig | grep 'Ethernet' | grep -v ':42' | awk '{print $1}' );
+		#for i in $( ifconfig | grep 'Ethernet' | grep -v ':42' | awk '{print $1}' );
+		#for i in $( ls /sys/class/net | grep "eth");
+		for i in $(ip address | awk '{print $2}' | grep "eth" | sed 's/:.*//')
 		do
 			NET_TITLE=$( echo "$i" | tr '[:lower:]' '[:upper:]' )
 			echo '${template5 '$i' '$NET_TITLE'}${template5 wlan'$index' WLAN'$index'}' >> $CONKYRC_USED;
@@ -509,7 +513,9 @@ if [[ $SOY != "CLIENTE" ]]; then
 		
 	elif [[ $SELECTION == *NET_UPLOAD* ]] ;  then
 		index=0
-		for i in $( ifconfig | grep 'Ethernet' | grep -v ':42' | awk '{print $1}' );
+		#for i in $( ifconfig | grep 'Ethernet' | grep -v ':42' | awk '{print $1}' );
+		#for i in $( ls /sys/class/net | grep "eth");
+		for i in $(ip address | awk '{print $2}' | grep "eth" | sed 's/:.*//')
 		do
 			NET_TITLE=$( echo "$i" | tr '[:lower:]' '[:upper:]' )
 			echo '${template6 '$i' '$NET_TITLE'}${template6 wlan'$index' WLAN'$index'}' >> $CONKYRC_USED;
@@ -517,7 +523,9 @@ if [[ $SOY != "CLIENTE" ]]; then
 		done
 	elif [[ $SELECTION == *IP_ADDRESS* ]] ;  then 
 		index=0
-		for i in $( ifconfig | grep 'Ethernet' | grep -v ':42' | awk '{print $1}' );
+		#for i in $( ifconfig | grep 'Ethernet' | grep -v ':42' | awk '{print $1}' );
+		#for i in $( ls /sys/class/net | grep "eth");
+		for i in $(ip address | awk '{print $2}' | grep "eth" | sed 's/:.*//')
 		do
 			NET_TITLE=$( echo "$i" | tr '[:lower:]' '[:upper:]' )
 			echo '${template7 '$i' '$NET_TITLE'}' >> $CONKYRC_USED;
