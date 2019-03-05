@@ -9,5 +9,5 @@ Comment[ca_ES]=Configuració del gadget conky
 Icon=lliurex-conky
 Category=Configuration
 ScriptPath=lliurex-conky.zmd
-Groups=adm;admins;teachers;students
+Groups=sudo;admins;teachers;students
 Using=pkexec
