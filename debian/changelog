@@ -1,4 +1,4 @@
-lliurex-conky (0.92ubuntu1) bionic; urgency=high
+lliurex-conky (0.93) bionic; urgency=high
 
   * increased check interval to 4 seconds 
 
