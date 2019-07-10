@@ -93,7 +93,8 @@ function conky_mirror () {
 	VERSION_32='0'
 	VERSION_64='0'
 	FICHERO='/tmp/mirror_version.txt'
-
+	
+	touch $FICHERO || true
 	:> $FICHERO
 	chmod 777 $FICHERO	
 
