@@ -37,7 +37,7 @@ diskio_avg_samples 5
 if_up_strictness address
 
 total_run_times 0
-update_interval 1
+update_interval 4
 ####################################################  End Window Settings  ###
 ###  Font Settings  ##########################################################
 # Use Xft (anti-aliased font and stuff)
