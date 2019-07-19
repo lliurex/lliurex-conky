@@ -1,3 +1,10 @@
+lliurex-conky (0.94) bionic; urgency=high
+
+  * Non-maintainer upload.
+  * Increase interval update 
+
+ -- Daniel Duran Vecino <daduve@gmail.com>  Fri, 19 Jul 2019 09:21:37 +0200
+
 lliurex-conky (0.93) bionic; urgency=high
 
   * increased check interval to 4 seconds 
