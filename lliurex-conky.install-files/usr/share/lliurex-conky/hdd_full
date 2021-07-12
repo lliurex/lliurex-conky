@@ -1,2 +1,4 @@
 #!/bin/bash
-( ps -aux | grep zenity | grep Conky > /dev/null ) || (zenity --info --title="Conky informa" --text="El disco esta casi lleno."> /dev/null 2>&1) &
+if [ $(df -h / | tail -1 |  awk '{ print $5 }' | cut -d% -f1) -gt 90 ]; then
+$((ps -aux | grep zenity | grep Conky > /dev/null ) || (zenity --info --title="Conky informa" --text="El disco esta casi lleno."> /dev/null 2>&1) &) ;
+fi
