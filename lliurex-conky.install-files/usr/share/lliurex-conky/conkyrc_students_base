@@ -2,17 +2,27 @@
 ## conkyrc students
 ##
 ## author : Daniel Durán
-## version : xenial
+## version : focal
 ## license : Distributed under the terms of GNU GPL version 2 or later
 ##
 #==============================================================================
 ###  Begin Window Settings  ##################################################
+
+
+
+
+
+
 own_window yes
 own_window_class Conky
 own_window_type dock
-own_window_transparent yes
+#own_window_transparent yes
+#own_window_colour grey
 own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
 own_window_title LLIUREX_CONKY
+own_window_argb_visual yes
+own_window_argb_value 150
+
 
 # Use the Xdbe extension? (eliminates flicker)
 # It is highly recommended to use own window with this one
@@ -22,19 +32,24 @@ double_buffer yes
 #minimum_size 600 500 ## width, height
 #maximum_width 600  ## width, usually a good idea to equal minimum width
 
+maximum_width 200
+alignment middle_right
 gap_x 30 ### left &right
-gap_y 250 ### up & down
+gap_y 0 ### up & down
 
-alignment bottom_right
+
+
+if_up_strictness address
+
 total_run_times 0
-update_interval 1
+update_interval 10
 ####################################################  End Window Settings  ###
 ###  Font Settings  ##########################################################
 # Use Xft (anti-aliased font and stuff)
 use_xft yes
 
 # Alpha of Xft font. Must be a value at or between 1 and 0 ###
-xftalpha 0.8
+xftalpha 0.6
 # Force UTF8? requires XFT ###
 override_utf8_locale yes
 
@@ -62,8 +77,6 @@ uppercase no
 #color8 FFFF00 #255 255   0	Yellow
 #color9 FF0000 #255   0   0	Red
 
-
-font AvantGardeLTMedium:bold:size=12
 #####################################################  End Color Settings  ###
 ###  Borders Section  ########################################################
 draw_borders no
@@ -80,7 +93,7 @@ draw_graph_borders no
 ###  Miscellaneous Section  ##################################################
 
 # Boolean value, if true, Conky will be forked to background when started.
-background no
+background yes
 
 # Adds spaces around certain objects to stop them from moving other things
 # around, this only helps if you are using a mono font
@@ -107,6 +120,11 @@ pad_percents 2
 #   Maximum size of user text buffer, i.e. layout below TEXT line in config file
 #  (default is 16384 bytes)
 # max_user_text 16384
+
+##############################################  End Miscellaneous Section  
+
+
+xftfont Debian bold:size=10
 
 ##############################################  End Miscellaneous Section  
 

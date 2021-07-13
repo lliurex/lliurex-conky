@@ -145,6 +145,7 @@ USUARIO: $LOGNAME
 EQUIPO: $nodename
 CLIENTE: ${if_match "${texeci 6000000 grep "server" /tmp/conky-test.txt -c}" != "0"}${if_empty ${texeci 6000000 echo $DISPLAY | cut -d ":" -f 1}}Servidor${else}Ligero${endif}${else}${if_match "${texeci 6000000 grep "client" /tmp/conky-test.txt -c}" != "0"}${if_empty ${texeci 6000000 cat /tmp/conky-test-fat.txt | grep true }}Pesado${else}Semiligero${endif}${else}Escritorio${endif}${endif}
 ARQUITECTURA: ${if_match "${texeci 60000000 grep "x86_64" /tmp/architecture.txt -c}" != "0"}64 Bits${else}32 Bits${endif}
+DISTRO: LliureX ${texeci 6000000 lliurex-version -n | cut -f1 -d "."}
 VERSIÓN:${texeci 6000000 lliurex-version -n}
 ${if_existing /tmp/mirror_version.txt}${if_match ${texeci 1800000 grep "VERSION 32" /tmp/mirror_version.txt -c}!=0}${if_match ${texeci 1800000 grep "VERSION 64" /tmp/mirror_version.txt -c}!=0}${template9}${else}${template8 32}${endif}${else}${if_match ${texeci 1800000 grep "VERSION 64" /tmp/mirror_version.txt -c}!=0}${template8 64}${endif}${endif}${else}NO MIRROR DONE${endif}
 ${template0 SISTEMA}
