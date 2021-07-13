@@ -7,12 +7,22 @@
 ##
 #==============================================================================
 ###  Begin Window Settings  ##################################################
+
+
+
+
+
+
 own_window yes
 own_window_class Conky
 own_window_type dock
-own_window_transparent yes
+#own_window_transparent yes
+#own_window_colour grey
 own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
 own_window_title LLIUREX_CONKY
+own_window_argb_visual yes
+own_window_argb_value 150
+
 
 # Use the Xdbe extension? (eliminates flicker)
 # It is highly recommended to use own window with this one
@@ -22,19 +32,24 @@ double_buffer yes
 #minimum_size 600 500 ## width, height
 #maximum_width 600  ## width, usually a good idea to equal minimum width
 
+maximum_width 200
+alignment middle_right
 gap_x 30 ### left &right
 gap_y 0 ### up & down
 
-alignment middle_right
+
+
+if_up_strictness address
+
 total_run_times 0
-update_interval 1
+update_interval 10
 ####################################################  End Window Settings  ###
 ###  Font Settings  ##########################################################
 # Use Xft (anti-aliased font and stuff)
 use_xft yes
 
 # Alpha of Xft font. Must be a value at or between 1 and 0 ###
-xftalpha 0.8
+xftalpha 0.6
 # Force UTF8? requires XFT ###
 override_utf8_locale yes
 
@@ -62,8 +77,6 @@ uppercase no
 #color8 FFFF00 #255 255   0	Yellow
 #color9 FF0000 #255   0   0	Red
 
-default_color white 
-font AvantGardeLTMedium:bold:size=12
 #####################################################  End Color Settings  ###
 ###  Borders Section  ########################################################
 draw_borders no
@@ -80,7 +93,7 @@ draw_graph_borders no
 ###  Miscellaneous Section  ##################################################
 
 # Boolean value, if true, Conky will be forked to background when started.
-background no
+background yes
 
 # Adds spaces around certain objects to stop them from moving other things
 # around, this only helps if you are using a mono font
@@ -111,14 +124,19 @@ pad_percents 2
 ##############################################  End Miscellaneous Section  
 
 
+xftfont Debian bold:size=10
+
+##############################################  End Miscellaneous Section  
+
+
 template1 ${if_up \1}\n IP \2:$alignr ${addrs \1}$endif
 
 TEXT
 $hr
   USUARIO: $LOGNAME
   EQUIPO: $nodename 
-  CLIENTE:${if_match "${texeci 6000000 grep "server" /tmp/conky-test.txt -c}" != "0"}${if_empty ${texeci 1000 echo $DISPLAY | cut -d ":" -f 1}}Servidor${else}Ligero${endif}${else}${if_match "${texeci 1000 grep "client" /tmp/conky-test.txt -c}" != "0"}${if_empty ${texeci 1000 cat /tmp/conky-test-fat.txt | grep true }}Pesado${else}Semiligero${endif}${else}Desktop${endif}${endif}
-  VERSION: ${texeci 60000 lliurex-version -n}
-  ARQUITECTURA: ${if_match "${texeci 6000000 grep "x86_64" /tmp/architecture.txt -c}" != "0"}64 Bits${else}32 Bits${endif}
+  CLIENTE:${if_match "${texeci 6000000 grep "server" /tmp/conky-test.txt -c}" != "0"}${if_empty ${texeci 1000 echo $DISPLAY | cut -d ":" -f 1}}Servidor${else}Ligero${endif}${else}${if_match "${texeci 1000 grep "client" /tmp/conky-test.txt -c}" != "0"}${if_empty ${texeci 1000 cat /tmp/conky-test-fat.txt | grep true }}Cliente Pesado${else}Cliente Semiligero${endif}${else}Desktop${endif}${endif}
+  DISTRO: LliureX ${texeci 6000000 lliurex-version -n | cut -f1 -d "."}
+  VERSION: ${texeci 6000000 lliurex-version -n}
 $hr${template1 eth0 ETH0}${template1 enp0s8 ETH1}${template1 eth2 ETH2}${template1 eth3 ETH3}${template1 eth4 ETH4}
 $hr
