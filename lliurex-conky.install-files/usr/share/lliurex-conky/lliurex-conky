@@ -46,7 +46,8 @@ uname -m > /tmp/architecture.txt
 lliurex-version > /tmp/conky-test.txt
 chmod 777 /tmp/conky-test.txt
 
-echo $LTSP_FATCLIENT > /tmp/conky-test-fat.txt
+if [ -d /run/lmd/semi ]; then echo "true" >  /tmp/conky-test-fat.txt; else echo "false" >  /tmp/conky-test-fat.txt; fi
+#echo $LTSP_FATCLIENT > /tmp/conky-test-fat.txt
 chmod 777 /tmp/conky-test-fat.txt
 
 
