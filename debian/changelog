@@ -1,3 +1,9 @@
+lliurex-conky (0.97) focal; urgency=medium
+
+  * Adding new Valenciano Language 
+
+ -- Daniel Duran <daduve@gmail.com>  Wed, 21 Jul 2021 12:25:30 +0200
+
 lliurex-conky (0.96) focal; urgency=medium
 
   * upgraded detection in semiligeros 
