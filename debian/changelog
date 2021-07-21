@@ -1,3 +1,9 @@
+lliurex-conky (0.96) focal; urgency=medium
+
+  * upgraded detection in semiligeros 
+
+ -- Daniel Duran <daduve@gmail.com>  Wed, 21 Jul 2021 10:01:44 +0200
+
 lliurex-conky (0.95) focal; urgency=medium
 
   * Fix bug in Llx21 
