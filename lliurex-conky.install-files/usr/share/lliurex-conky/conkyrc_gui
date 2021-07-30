@@ -9,8 +9,11 @@ CONKYRC_ADMIN_BASE=$FILE_PATH/conkyrc_admins_base
 CONKYRC_STUDENTS=$FILE_PATH/conkyrc_students
 CONKYRC_STUDENTS_BASE=$FILE_PATH/conkyrc_students_base
 USER=$(getent passwd | grep x:$PKEXEC_UID: | cut -d ":" -f 1)
-CONKYRC_HOME=$HOME
+CONKYRC_HOME=/home/$USER
 CONKYRC_USED=$CONKYRC_HOME/.config/lliurex-conky/conkyrc_used
+
+echo "USER: $USER"
+echo "HOME: $HOME"
 
 
 SELECTION_COLOUR2="dodgerblue3"
@@ -216,6 +219,9 @@ function cancelar () {
 				echo '#modified_by_user' >> $CONKYRC_USED
 				zero-center set-non-configured lliurex-conky
 				zero-center remove-pulsating-color lliurex-conky
+				if [ -f /etc/xdg/autostart/lliurex-conky.desktop ]; then
+					rm /etc/xdg/autostart/lliurex-conky.desktop
+				fi
 				exit 0
 		fi
 	else
@@ -585,6 +591,7 @@ else
 fi
 
 echo "Conky modificado........STARTING IT"
+cp /usr/share/lliurex-conky/lliurex-conky.desktop /etc/xdg/autostart/lliurex-conky.desktop
 zero-center set-configured lliurex-conky
 zero-center remove-pulsating-color lliurex-conky
 exit 0
