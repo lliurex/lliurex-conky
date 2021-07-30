@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Name=LliureX Conky
+Comment=Show & monitoring hardware information
+Comment[qcv]=Mostra i monitoritza informació del hardware
+Comment[es]=Muestra y monitoriza informacion del hardware
+Exec=/usr/share/lliurex-conky/lliurex-conky
+Terminal=false
+Type=Application
+Categories=Utility;
+GenericName=LliureX Conky
