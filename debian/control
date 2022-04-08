@@ -1,0 +1,15 @@
+Source: lliurex-conky
+Section: admin
+Priority: optional
+Maintainer: Equipo LliureX <lliurex@gva.es>
+Uploaders: Equipo LliureX <lliurex@gva.es>
+Build-Depends: debhelper (>= 10),zero-dev,llxsrchelper,python3-poinstaller
+Standards-Version: 4.1.2
+
+Package: lliurex-conky
+Architecture: all
+Depends: ${misc:Depends}, conky 
+Description: LliurexCONKY configured special settings
+ - Show user, hostname, IP address and Lliurex Version
+ For LliureX
+
