@@ -95,28 +95,31 @@ function conky_mirror () {
 	VERSION_64='0'
 	FICHERO='/tmp/mirror_version.txt'
 	
-	touch $FICHERO || true
-	:> $FICHERO
-	chmod 777 $FICHERO	
+	rm $FICHERO || true
+	
 
-	ARQ=$(find /net/mirror/llx16/pool/main/l/lliurex-meta -name '*386.deb' | head -1 )
-	VERSION=$(find /net/mirror/llx16/pool/main/l/lliurex-version-timestamp -name 'lliurex-version-timestamp*.deb' | head -1)
+	ARQ=$(find /net/mirror/llx21/pool/main/l/lliurex-meta -name '*386.deb' | head -1 )
+	VERSION=$(find /net/mirror/llx21/pool/main/l/lliurex-version-timestamp -name 'lliurex-version-timestamp*.deb' | head -1)
 
 	if [ -n "$ARQ" ]; then 
 	
-			touch $FICHERO
+			if [ ! -f $FICHERO ]; then
+				touch $FICHERO
+				chmod 777 $FICHERO	
+			fi
 			NUMERO_32=$(echo $VERSION | cut -d_ -f2 )
 			echo 'VERSION 32 BITS:' $NUMERO_32 >> $FICHERO
 			
 	fi
 
-	ARQ=$(find /net/mirror/llx16/pool/main/l/lliurex-meta -name '*amd64.deb' | head -1)
-	VERSION=$(find /net/mirror/llx16/pool/main/l/lliurex-version-timestamp -name 'lliurex-version-timestamp*.deb' | head -1)
+	ARQ=$(find /net/mirror/llx21/pool/main/l/lliurex-meta -name '*amd64.deb' | head -1)
+	VERSION=$(find /net/mirror/llx21/pool/main/l/lliurex-version-timestamp -name 'lliurex-version-timestamp*.deb' | head -1)
 
 	if [ -n "$ARQ" ]; then 
 			
 			if [ ! -f $FICHERO ]; then
 				touch $FICHERO
+				chmod 777 $FICHERO	
 			fi
 			NUMERO_64=$(echo $VERSION | cut -d_ -f2 )
 			echo 'VERSION 64 BITS:' $NUMERO_64 >> $FICHERO
