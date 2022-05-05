@@ -12,9 +12,6 @@ USER=$(getent passwd | grep x:$PKEXEC_UID: | cut -d ":" -f 1)
 CONKYRC_HOME=/home/$USER
 CONKYRC_USED=$CONKYRC_HOME/.config/lliurex-conky/conkyrc_used
 
-echo "USER: $USER"
-echo "HOME: $HOME"
-
 
 SELECTION_COLOUR2="dodgerblue3"
 SELECTION_COLOUR="white"
@@ -54,10 +51,8 @@ MSG_HOSTNAME_DESC=$(gettext "Netname to the Pc")
 MSG_CLIENT_TYPE=$(gettext "LliureX type client")
 MSG_ARCHITECTURE=$(gettext "ARCHITECTURE")
 MSG_ARCHITECTURE_DESC=$(gettext "Architecture type, 32 or 64 Bits")
-MSG_DISTRO=$(gettext "DISTRO")
-MSG_DISTRO_DESC=$(gettext "LliureX distro installed.")
 MSG_VERSION=$(gettext "VERSION")
-MSG_VERSION_DESC=$(gettext "LliureX version updated")
+MSG_VERSION_DESC=$(gettext "LliureX version installed")
 MSG_NET_ADDRESS=$(gettext "NET ADDRESS")
 MSG_NET_ADDRESS_DESC=$(gettext "Show Ip address for every netcards connected")
 MSG_MIRROR=$(gettext "MIRROR")
@@ -129,13 +124,11 @@ function conky_mirror () {
 	VERSION_64='0'
 	FICHERO='/tmp/mirror_version.txt'
 
-	if [ -f $FICHERO ]; then
-		rm $FICHERO
-	fi
+	rm $FICHERO
 	
 
-	ARQ=$(find /net/mirror/llx21/pool/main/l/lliurex-meta -name '*386.deb' | head -1 )
-	VERSION=$(find /net/mirror/llx21/pool/main/l/lliurex-version-timestamp -name 'lliurex-version-timestamp*.deb' | head -1)
+	ARQ=$(find /net/mirror/llx16/pool/main/l/lliurex-meta -name '*386.deb' | head -1 )
+	VERSION=$(find /net/mirror/llx16/pool/main/l/lliurex-version-timestamp -name 'lliurex-version-timestamp*.deb' | head -1)
 
 	if [ -n "$ARQ" ]; then 
 	
@@ -145,8 +138,8 @@ function conky_mirror () {
 			
 	fi
 
-	ARQ=$(find /net/mirror/llx21/pool/main/l/lliurex-meta -name '*amd64.deb' | head -1)
-	VERSION=$(find /net/mirror/llx21/pool/main/l/lliurex-version-timestamp -name 'lliurex-version-timestamp*.deb' | head -1)
+	ARQ=$(find /net/mirror/llx16/pool/main/l/lliurex-meta -name '*amd64.deb' | head -1)
+	VERSION=$(find /net/mirror/llx16/pool/main/l/lliurex-version-timestamp -name 'lliurex-version-timestamp*.deb' | head -1)
 
 	if [ -n "$ARQ" ]; then 
 			
@@ -219,9 +212,6 @@ function cancelar () {
 				echo '#modified_by_user' >> $CONKYRC_USED
 				zero-center set-non-configured lliurex-conky
 				zero-center remove-pulsating-color lliurex-conky
-				if [ -f /etc/xdg/autostart/lliurex-conky.desktop ]; then
-					rm /etc/xdg/autostart/lliurex-conky.desktop
-				fi
 				exit 0
 		fi
 	else
@@ -269,7 +259,6 @@ function student_rc () {
 					TRUE "EQUIPO" "$MSG_HOSTNAME" "$MSG_HOSTNAME_DESC" \
 					TRUE "CLIENTE" "$MSG_CLIENT" "$MSG_CLIENT_TYPE" \
 					TRUE "ARQUITECTURA" "$MSG_ARCHITECTURE" "$MSG_ARCHITECTURE_DESC" \
-					TRUE "DISTRO" "$MSG_DISTRO" "$MSG_DISTRO_DESC" \
 					TRUE "VERSION" "$MSG_VERSION" "$MSG_VERSION_DESC" \
 					TRUE "IP_ADDRESS" "$MSG_NET_ADDRESS" "$MSG_NET_ADDRESS_DESC" \
 					--separator=":"`
@@ -287,7 +276,6 @@ function server_rc () {
 				TRUE "EQUIPO" "$MSG_HOSTNAME" "$MSG_HOSTNAME_DESC" \
 				TRUE "CLIENTE" "$MSG_CLIENT" "$MSG_CLIENT_TYPE" \
 				TRUE "ARQUITECTURA"  "$MSG_ARCHITECTURE" "$MSG_ARCHITECTURE_DESC" \
-				TRUE "DISTRO" "$MSG_DISTRO" "$MSG_DISTRO_DESC" \
 				TRUE "VERSION" "$MSG_VERSION" "$MSG_VERSION_DESC" \
 				TRUE "MIRROR_VERSION" "$MSG_MIRROR" "$MSG_MIRROR_DESC" \
 				TRUE "HDD_ALERT" "$MSG_HDD_ALERT" "$MSG_HDD_ALERT_DESC" \
@@ -432,7 +420,7 @@ function change_colour {
 
 ##########PROGRAMA PRINCIPAL############
 zero-center add-pulsating-color lliurex-conky
-echo "##########PROGRAMA PRINCIPAL############"
+echo "??????????????????????????"
 echo $CONKYRC_HOME
 
 if [[ ! -e $CONKYRC_HOME/.config/lliurex-conky ]]; then
@@ -475,11 +463,10 @@ if [[ $SOY != "CLIENTE" ]]; then
 		
 	####DATOS INICIALES####
 	if [[ $SELECTION == *USUARIO* ]] || [[ $SELECTION == *EQUIPO* ]] || [[ $SELECTION == *CLIENTE* ]] || [[ $SELECTION == *ARQUITECTURA* ]] || [[ $SELECTION == *VERSION* ]] ;  then echo '${template0 '$MSG_DATOS_PANEL'}' >> $CONKYRC_USED;fi
-	if [[ $SELECTION == *USUARIO* ]] ; then echo ''$MSG_USER': $LOGNAME' >> $CONKYRC_USED;fi
+	if [[ $SELECTION == *USUARIO* ]] ; then echo ''$MSG_USER': $USER' >> $CONKYRC_USED;fi
 	if [[ $SELECTION == *EQUIPO* ]] ; then echo ''$MSG_HOSTNAME': $nodename' >> $CONKYRC_USED;fi
 	if [[ $SELECTION == *CLIENTE* ]] ; then echo ''$MSG_CLIENT': ${if_match "${texeci 6000000 grep "server" /tmp/conky-test.txt -c}" != "0"}${if_empty ${texeci 6000000 echo $DISPLAY | cut -d ":" -f 1}}'$MSG_SERVER_PANEL'${else}'$MSG_LIGERO_PANEL'${endif}${else}${if_match "${texeci 6000000 grep "client" /tmp/conky-test.txt -c}" != "0"}${if_empty ${texeci 6000000 cat /tmp/conky-test-fat.txt | grep true }}'$MSG_PESADO_PANEL'${else}'$MSG_SEMILIGERO_PANEL'${endif}${else}'$MSG_DESKTOP_PANEL'${endif}${endif}' >> $CONKYRC_USED;fi
 	if [[ $SELECTION == *ARQUITECTURA* ]] ; then echo ''$MSG_ARCHITECTURE': ${if_match "${texeci 6000000 grep "x86_64" /tmp/architecture.txt -c}" != "0"}64 Bits${else}32 Bits${endif}' >> $CONKYRC_USED;fi
-	if [[ $SELECTION == *DISTRO* ]] ; then echo ''$MSG_DISTRO': LliureX ${texeci 6000000 lliurex-version -n | cut -f1 -d "."}' >> $CONKYRC_USED;fi
 	if [[ $SELECTION == *VERSION* ]] ; then echo ''$MSG_VERSION':${texeci 6000000 lliurex-version -n}' >> $CONKYRC_USED;fi
 	if [[ $SELECTION == *MIRROR_VERSION* ]] ; then
 			echo '${if_existing /tmp/mirror_version.txt}${if_match ${texeci 1800000 grep "VERSION 32" /tmp/mirror_version.txt -c}!=0}${if_match ${texeci 1800000 grep "VERSION 64" /tmp/mirror_version.txt -c}!=0}${template9}${else}${template8 32}${endif}${else}${if_match ${texeci 1800000 grep "VERSION 64" /tmp/mirror_version.txt -c}!=0}${template8 64}${endif}${endif}${else}NO MIRROR DONE${endif}' >> $CONKYRC_USED
@@ -506,44 +493,60 @@ if [[ $SOY != "CLIENTE" ]]; then
 		index=0
 		#for i in $( ifconfig | grep 'Ethernet' | grep -v ':42' | awk '{print $1}' );
 		#for i in $( ls /sys/class/net | grep "eth");
-		for i in $(ip address | awk '{print $2}' | grep "eth" | sed 's/:.*//')
+		LINE_TO_AD=""
+		for i in $(ip -br -c link show | grep -v LOOPBACK | awk '{ print $1 }')
 		do
 			NET_TITLE=$( echo "$i" | tr '[:lower:]' '[:upper:]' )
-			echo '${template3 '$i' '$NET_TITLE'}${template4 wlan'$index' WLAN'$index'}' >> $CONKYRC_USED;
+			LINE_TO_AD=$LINE_TO_AD'${template3 '$i' '$NET_TITLE'}'
 			index=$((index+1))
 		done
+		if [[ $index != 0 ]]; then
+			echo $LINE_TO_AD >> $CONKYRC_USED;
+		fi
 	
 	elif [[ $SELECTION == *NET_DOWNLOAD* ]] ;  then
 		index=0
 		#for i in $( ifconfig | grep 'Ethernet' | grep -v ':42' | awk '{print $1}' );
 		#for i in $( ls /sys/class/net | grep "eth");
-		for i in $(ip address | awk '{print $2}' | grep "eth" | sed 's/:.*//')
+		LINE_TO_AD=""
+		for i in $(ip -br -c link show | grep -v LOOPBACK | awk '{ print $1 }')
 		do
 			NET_TITLE=$( echo "$i" | tr '[:lower:]' '[:upper:]' )
-			echo '${template5 '$i' '$NET_TITLE'}${template5 wlan'$index' WLAN'$index'}' >> $CONKYRC_USED;
+			LINE_TO_AD=$LINE_TO_AD'${template5 '$i' '$NET_TITLE'}'
 			index=$((index+1))
 		done
-		
+		if [[ $index != 0 ]]; then
+			echo $LINE_TO_AD >> $CONKYRC_USED;
+		fi
 	elif [[ $SELECTION == *NET_UPLOAD* ]] ;  then
 		index=0
 		#for i in $( ifconfig | grep 'Ethernet' | grep -v ':42' | awk '{print $1}' );
 		#for i in $( ls /sys/class/net | grep "eth");
-		for i in $(ip address | awk '{print $2}' | grep "eth" | sed 's/:.*//')
+		LINE_TO_AD=""
+		for i in $(ip -br -c link show | grep -v LOOPBACK | awk '{ print $1 }')
 		do
 			NET_TITLE=$( echo "$i" | tr '[:lower:]' '[:upper:]' )
-			echo '${template6 '$i' '$NET_TITLE'}${template6 wlan'$index' WLAN'$index'}' >> $CONKYRC_USED;
+			LINE_TO_AD=$LINE_TO_AD'${template6 '$i' '$NET_TITLE'}'
 			index=$((index+1))
 		done
+		if [[ $index != 0 ]]; then
+			echo $LINE_TO_AD >> $CONKYRC_USED;
+		fi
 	elif [[ $SELECTION == *IP_ADDRESS* ]] ;  then 
 		index=0
 		#for i in $( ifconfig | grep 'Ethernet' | grep -v ':42' | awk '{print $1}' );
 		#for i in $( ls /sys/class/net | grep "eth");
-		for i in $(ip address | awk '{print $2}' | grep "eth" | sed 's/:.*//')
+		LINE_TO_AD=""
+		for i in $(ip -br -c link show | grep -v LOOPBACK | awk '{ print $1 }')
 		do
 			NET_TITLE=$( echo "$i" | tr '[:lower:]' '[:upper:]' )
-			echo '${template7 '$i' '$NET_TITLE'}' >> $CONKYRC_USED;
+			LINE_TO_AD=$LINE_TO_AD'${template7 '$i' '$NET_TITLE'}'
 			index=$((index+1))
 		done
+		if [[ $index != 0 ]]; then
+			echo $LINE_TO_AD 
+			echo $LINE_TO_AD >> $CONKYRC_USED;
+		fi
 	fi
 	####HDD####
 	
@@ -575,13 +578,24 @@ else
 	echo '$hr' >> $CONKYRC_USED
 	
 	####DATOS INICIALES####
-	if [[ $SELECTION == *USUARIO* ]] ; then echo ''$MSG_USER': $LOGNAME' >> $CONKYRC_USED;fi
+	if [[ $SELECTION == *USUARIO* ]] ; then echo ''$MSG_USER': $USER' >> $CONKYRC_USED;fi
 	if [[ $SELECTION == *EQUIPO* ]] ; then echo ''$MSG_HOSTNAME': $nodename' >> $CONKYRC_USED;fi
 	if [[ $SELECTION == *CLIENTE* ]] ; then echo ''$MSG_CLIENT': ${if_match "${texeci 6000000 grep "server" /tmp/conky-test.txt -c}" != "0"}${if_empty ${texeci 6000000 echo $DISPLAY | cut -d ":" -f 1}}'$MSG_SERVER_PANEL'${else}'$MSG_LIGERO_PANEL'${endif}${else}${if_match "${texeci 6000000 grep "client" /tmp/conky-test.txt -c}" != "0"}${if_empty ${texeci 6000000 cat /tmp/conky-test-fat.txt | grep true }}'$MSG_PESADO_PANEL'${else}'$MSG_SEMILIGERO_PANEL'${endif}${else}'$MSG_DESKTOP_PANEL'${endif}${endif}' >> $CONKYRC_USED;fi
 	if [[ $SELECTION == *ARQUITECTURA* ]] ; then echo ''$MSG_ARCHITECTURE': ${if_match "${texeci 6000000 grep "x86_64" /tmp/architecture.txt -c}" != "0"}64 Bits${else}32 Bits${endif}' >> $CONKYRC_USED;fi
-	if [[ $SELECTION == *DISTRO* ]] ; then echo ''$MSG_DISTRO': LliureX ${texeci 6000000 lliurex-version -n | cut -f1 -d "."}' >> $CONKYRC_USED;fi
+	#if [[ $SELECTION == *VERSION* ]] ; then echo ''$MSG_VERSION': ${if_existing /usr/share/lliurex-cdd/version}${texeci 10000 cat /usr/share/lliurex-cdd/version}${endif}' >> $CONKYRC_USED;fi
 	if [[ $SELECTION == *VERSION* ]] ; then echo ''$MSG_VERSION':${texeci 60000000 lliurex-version -n}' >> $CONKYRC_USED;fi
-	if [[ $SELECTION == *IP_ADDRESS* ]] ;  then echo '$hr${template1 eth0 ETH0}${template1 eth1 ETH1}${template1 eth2 ETH2}${template1 eth3 ETH3}${template1 eth4 ETH4}'>> $CONKYRC_USED;fi
+	if [[ $SELECTION == *IP_ADDRESS* ]] ;  then 
+	LINE_TO_AD=""
+		for i in $(ip -br -c link show | grep -v LOOPBACK | awk '{ print $1 }')
+		do
+			NET_TITLE=$( echo "$i" | tr '[:lower:]' '[:upper:]' )
+			LINE_TO_AD=$LINE_TO_AD'${template1 '$i' '$NET_TITLE'}'
+			index=$((index+1))
+		done
+		if [[ $index != 0 ]]; then
+			echo $LINE_TO_AD >> $CONKYRC_USED;
+		fi
+	fi
 	echo '$hr' >> $CONKYRC_USED
 	
 	#####LINEA QUE ME SIRVE PARA INDICAR QUE FUE MODIFICADO POR EL USUARIO,SE ANYADE AL INICIO DEL FICHERO
@@ -591,7 +605,6 @@ else
 fi
 
 echo "Conky modificado........STARTING IT"
-cp /usr/share/lliurex-conky/lliurex-conky.desktop /etc/xdg/autostart/lliurex-conky.desktop
 zero-center set-configured lliurex-conky
 zero-center remove-pulsating-color lliurex-conky
 exit 0
