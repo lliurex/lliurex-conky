@@ -1,3 +1,10 @@
+lliurex-conky (0.95) bionic; urgency=medium
+
+  * Fix bug to detect NO MIRROR DONE.
+  * Autodetect all net interfaces to show it.
+
+ -- Daniel Duran <daduve@gmail.com>  Thu, 05 May 2022 14:36:04 +0200
+
 lliurex-conky (0.94) bionic; urgency=high
 
   * Non-maintainer upload.
