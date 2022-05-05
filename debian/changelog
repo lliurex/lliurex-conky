@@ -1,3 +1,10 @@
+lliurex-conky (0.100) focal; urgency=medium
+
+  * Fix bug to detect NO MIRROR DONE 
+  * Adding suport to detect all netinterfaces in use
+
+ -- Daniel Duran <daduve@gmail.com>  Thu, 05 May 2022 14:40:21 +0200
+
 lliurex-conky (0.99) focal; urgency=medium
 
   * Fix bug in detection semiligero 
