@@ -1,3 +1,9 @@
+lliurex-conky (0.101) bionic; urgency=medium
+
+  * Deleting colour in ETH output
+
+ -- Daniel Duran <daduve@gmail.com>  Fri, 06 May 2022 13:07:49 +0200
+
 lliurex-conky (0.95) bionic; urgency=medium
 
   * Fix bug to detect NO MIRROR DONE.
