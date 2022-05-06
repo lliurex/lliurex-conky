@@ -494,7 +494,7 @@ if [[ $SOY != "CLIENTE" ]]; then
 		#for i in $( ifconfig | grep 'Ethernet' | grep -v ':42' | awk '{print $1}' );
 		#for i in $( ls /sys/class/net | grep "eth");
 		LINE_TO_AD=""
-		for i in $(ip -br -c link show | grep -v LOOPBACK | awk '{ print $1 }')
+		for i in $(ip -br -c link show | grep -v LOOPBACK | awk '{ print $1 }' | sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2})?)?[mGK]//g" )
 		do
 			NET_TITLE=$( echo "$i" | tr '[:lower:]' '[:upper:]' )
 			LINE_TO_AD=$LINE_TO_AD'${template3 '$i' '$NET_TITLE'}'
@@ -509,7 +509,7 @@ if [[ $SOY != "CLIENTE" ]]; then
 		#for i in $( ifconfig | grep 'Ethernet' | grep -v ':42' | awk '{print $1}' );
 		#for i in $( ls /sys/class/net | grep "eth");
 		LINE_TO_AD=""
-		for i in $(ip -br -c link show | grep -v LOOPBACK | awk '{ print $1 }')
+		for i in $(ip -br -c link show | grep -v LOOPBACK | awk '{ print $1 }' | sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2})?)?[mGK]//g" )
 		do
 			NET_TITLE=$( echo "$i" | tr '[:lower:]' '[:upper:]' )
 			LINE_TO_AD=$LINE_TO_AD'${template5 '$i' '$NET_TITLE'}'
@@ -523,7 +523,7 @@ if [[ $SOY != "CLIENTE" ]]; then
 		#for i in $( ifconfig | grep 'Ethernet' | grep -v ':42' | awk '{print $1}' );
 		#for i in $( ls /sys/class/net | grep "eth");
 		LINE_TO_AD=""
-		for i in $(ip -br -c link show | grep -v LOOPBACK | awk '{ print $1 }')
+		for i in $(ip -br -c link show | grep -v LOOPBACK | awk '{ print $1 }' | sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2})?)?[mGK]//g" )
 		do
 			NET_TITLE=$( echo "$i" | tr '[:lower:]' '[:upper:]' )
 			LINE_TO_AD=$LINE_TO_AD'${template6 '$i' '$NET_TITLE'}'
@@ -537,7 +537,7 @@ if [[ $SOY != "CLIENTE" ]]; then
 		#for i in $( ifconfig | grep 'Ethernet' | grep -v ':42' | awk '{print $1}' );
 		#for i in $( ls /sys/class/net | grep "eth");
 		LINE_TO_AD=""
-		for i in $(ip -br -c link show | grep -v LOOPBACK | awk '{ print $1 }')
+		for i in $(ip -br -c link show | grep -v LOOPBACK | awk '{ print $1 }' | sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2})?)?[mGK]//g" )
 		do
 			NET_TITLE=$( echo "$i" | tr '[:lower:]' '[:upper:]' )
 			LINE_TO_AD=$LINE_TO_AD'${template7 '$i' '$NET_TITLE'}'
@@ -586,14 +586,17 @@ else
 	if [[ $SELECTION == *VERSION* ]] ; then echo ''$MSG_VERSION':${texeci 60000000 lliurex-version -n}' >> $CONKYRC_USED;fi
 	if [[ $SELECTION == *IP_ADDRESS* ]] ;  then 
 	LINE_TO_AD=""
-		for i in $(ip -br -c link show | grep -v LOOPBACK | awk '{ print $1 }')
+	index=0
+		for i in $(ip -br -c link show | grep -v LOOPBACK | awk '{ print $1 }' | sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2})?)?[mGK]//g" )
 		do
 			NET_TITLE=$( echo "$i" | tr '[:lower:]' '[:upper:]' )
 			LINE_TO_AD=$LINE_TO_AD'${template1 '$i' '$NET_TITLE'}'
 			index=$((index+1))
 		done
 		if [[ $index != 0 ]]; then
+			echo "UPDATING CONKYRC_USED"
 			echo $LINE_TO_AD >> $CONKYRC_USED;
+			cat $CONKYRC_USED
 		fi
 	fi
 	echo '$hr' >> $CONKYRC_USED
