@@ -8,7 +8,7 @@ Standards-Version: 4.1.2
 
 Package: lliurex-conky
 Architecture: all
-Depends: ${misc:Depends}, conky 
+Depends: ${misc:Depends}, conky, zenity
 Description: LliurexCONKY configured special settings
  - Show user, hostname, IP address and Lliurex Version
  For LliureX
