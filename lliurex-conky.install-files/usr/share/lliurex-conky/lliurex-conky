@@ -96,7 +96,6 @@ function conky_mirror () {
 	FICHERO='/tmp/mirror_version.txt'
 	
 	rm $FICHERO || true
-	
 
 	ARQ=$(find /net/mirror/llx21/pool/main/l/lliurex-meta -name '*386.deb' | head -1 )
 	VERSION=$(find /net/mirror/llx21/pool/main/l/lliurex-version-timestamp -name 'lliurex-version-timestamp*.deb' | head -1)
