@@ -96,10 +96,9 @@ function conky_mirror () {
 	FICHERO='/tmp/mirror_version.txt'
 	
 	rm $FICHERO || true
-	
 
-	ARQ=$(find /net/mirror/llx23/pool/main/l/lliurex-meta -name '*386.deb' | head -1 )
-	VERSION=$(find /net/mirror/llx23/pool/main/l/lliurex-version-timestamp -name 'lliurex-version-timestamp*.deb' | head -1)
+	ARQ=$(find /net/mirror/llx21/pool/main/l/lliurex-meta -name '*386.deb' | head -1 )
+	VERSION=$(find /net/mirror/llx21/pool/main/l/lliurex-version-timestamp -name 'lliurex-version-timestamp*.deb' | head -1)
 
 	if [ -n "$ARQ" ]; then 
 	
@@ -112,8 +111,8 @@ function conky_mirror () {
 			
 	fi
 
-	ARQ=$(find /net/mirror/llx23/pool/main/l/lliurex-meta -name '*amd64.deb' | head -1)
-	VERSION=$(find /net/mirror/llx23/pool/main/l/lliurex-version-timestamp -name 'lliurex-version-timestamp*.deb' | head -1)
+	ARQ=$(find /net/mirror/llx21/pool/main/l/lliurex-meta -name '*amd64.deb' | head -1)
+	VERSION=$(find /net/mirror/llx21/pool/main/l/lliurex-version-timestamp -name 'lliurex-version-timestamp*.deb' | head -1)
 
 	if [ -n "$ARQ" ]; then 
 			
@@ -150,7 +149,7 @@ if [[ -f $CONKYRC_USED ]]
 then
 	echo "Do nothing with $CONKYRC_USED"
 	sleep 15
-	conky -c $CONKYRC_USED
+	a=$(conky -c $CONKYRC_USED)
 else
 	sleep 15
 	conky_version
