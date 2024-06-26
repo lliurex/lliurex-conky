@@ -149,7 +149,7 @@ if [[ -f $CONKYRC_USED ]]
 then
 	echo "Do nothing with $CONKYRC_USED"
 	sleep 15
-	conky -c $CONKYRC_USED
+	a=$(conky -c $CONKYRC_USED)
 else
 	sleep 15
 	conky_version
