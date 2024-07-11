@@ -127,8 +127,8 @@ function conky_mirror () {
 	rm $FICHERO
 	
 
-	ARQ=$(find /net/mirror/llx16/pool/main/l/lliurex-meta -name '*386.deb' | head -1 )
-	VERSION=$(find /net/mirror/llx16/pool/main/l/lliurex-version-timestamp -name 'lliurex-version-timestamp*.deb' | head -1)
+	ARQ=$(find /net/mirror/llx23/pool/main/l/lliurex-meta -name '*386.deb' | head -1 )
+	VERSION=$(find /net/mirror/llx23/pool/main/l/lliurex-version-timestamp -name 'lliurex-version-timestamp*.deb' | head -1)
 
 	if [ -n "$ARQ" ]; then 
 	
@@ -138,8 +138,8 @@ function conky_mirror () {
 			
 	fi
 
-	ARQ=$(find /net/mirror/llx16/pool/main/l/lliurex-meta -name '*amd64.deb' | head -1)
-	VERSION=$(find /net/mirror/llx16/pool/main/l/lliurex-version-timestamp -name 'lliurex-version-timestamp*.deb' | head -1)
+	ARQ=$(find /net/mirror/llx23/pool/main/l/lliurex-meta -name '*amd64.deb' | head -1)
+	VERSION=$(find /net/mirror/llx23/pool/main/l/lliurex-version-timestamp -name 'lliurex-version-timestamp*.deb' | head -1)
 
 	if [ -n "$ARQ" ]; then 
 			
