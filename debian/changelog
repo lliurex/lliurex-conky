@@ -1,3 +1,9 @@
+lliurex-conky (0.301.3) noble; urgency=medium
+
+  * Only in desktop, under windows.
+
+ -- Daniel Duran <daduve@gmail.com>  Wed, 30 Apr 2025 19:26:48 +0200
+
 lliurex-conky (0.301.2) noble; urgency=medium
 
   * Initial release for Noble
