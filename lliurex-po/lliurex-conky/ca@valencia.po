@@ -1,0 +1,387 @@
+# Spanish translations for PACKAGE package.
+# Copyright (C) 2012 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Daniel Durán Vecino <daduve@gmail.com>, 2016
+# Pilar Embid Giner <embid_mar@gva.es>, 2015, 2016.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-10-05 17:00+0200\n"
+"PO-Revision-Date: 2016-10-25 09:33+0200\n"
+"Last-Translator: Pilar Embid Giner <embid_mar@gva.es>\n"
+"Language-Team: LliureX\n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Virtaal 0.7.1\n"
+
+#: conkyrc_gui:24
+msgid "LLIUREX CONKY CONFIGURATOR"
+msgstr "CONFIGURADOR DEL CONKY"
+
+#: conkyrc_gui:25
+msgid "Do you want conky on desktop?"
+msgstr "Voleu que el Conky siga visible?"
+
+#: conkyrc_gui:26
+msgid "CONKY CONFIGUTATOR. SELECT THE FORMAT THAT YOU LIKE"
+msgstr "CONFIGURADOR DEL CONKY, SELECCIONEU EL FORMAT QUE MÉS US AGRADE"
+
+#: conkyrc_gui:27
+msgid "<b><big>INFO </big></b>CONKY TEXT: <small>Select your favourite colour or personalice it for INFO</small>"
+msgstr ""
+"<b><big>INFO </big></b>TEXT DEL CONKY: <small>per a INFO, seleccioneu el "
+"color preferit o personalitzeu-lo</small>"
+
+#: conkyrc_gui:28
+msgid "<b><big>TITLE </big></b>CONKY TEXT: <small>Select you favourite colour or personalice it for TITLE</small>"
+msgstr ""
+"<b><big>TÍTOL </big></b>TEXT DEL CONKY: <small>per a TÍTOL, seleccioneu el "
+"color preferit o personalitzeu-lo</small>"
+
+#: conkyrc_gui:29
+msgid "SELECT ONE COLOUR"
+msgstr "SELECCIONEU UN COLOR"
+
+#: conkyrc_gui:30
+msgid "Select your favourite colour for the: TITLES"
+msgstr "Seleccioneu el color preferit per als: TÍTOLS"
+
+#: conkyrc_gui:31
+msgid "Select your favourite colour for the: INFO "
+msgstr "Seleccioneu el color preferit per a la: INFO "
+
+#: conkyrc_gui:32
+msgid "SELECT"
+msgstr "SELECCIONEU"
+
+#: conkyrc_gui:33
+msgid "STYLE"
+msgstr "ESTIL"
+
+#: conkyrc_gui:34
+msgid "DESCRIPTION"
+msgstr "DESCRIPCIÓ"
+
+#: conkyrc_gui:35
+msgid "SERVER"
+msgstr "SERVIDOR"
+
+#: conkyrc_gui:36
+#: lliurex-conky/conkyrc.gui:191
+msgid "Show and monitor, CPU, RAM, NET AND HARD DISK"
+msgstr ""
+"Mostra els paràmetres i fa un seguiment de la CPU, la RAM, la XARXA i el "
+"DISC DUR"
+
+#: conkyrc_gui:37
+msgid "CLIENT"
+msgstr "CLIENT"
+
+#: conkyrc_gui:38
+msgid "Show only basic mode, HOSTNAME, ARCHITECTURE, VERSION AND NET ADDRESS"
+msgstr ""
+"Mostra només el mode bàsic, EQUIP, ARQUITECTURA, VERSIÓ i ADRECES DE XARXA"
+
+#: conkyrc_gui:39
+msgid ""
+"CONKY CONFIGURATOR, SELECT THE PARAMETERS WHAT YOU WANT TO SEE IN YOUR "
+"DESKTOP:"
+msgstr ""
+"CONFIGURADOR DEL CONKY, SELECCIONEU ELS PARÀMETRES QUE VOLEU QUE SIGUEN "
+"VISIBLES:"
+
+#: conkyrc_gui:40
+msgid "PARAMETER"
+msgstr "PARÀMETRE"
+
+#: conkyrc_gui:41
+msgid "USER"
+msgstr "USUARI"
+
+#: conkyrc_gui:42
+msgid "User logged to the session in Pc"
+msgstr "Usuari que ha iniciat sessió en el PC"
+
+#: conkyrc_gui:43
+msgid "HOSTNAME"
+msgstr "EQUIP"
+
+#: conkyrc_gui:44
+msgid "Netname to the Pc"
+msgstr "Nom de l'equip en la xarxa"
+
+#: conkyrc_gui:45
+msgid "LliureX type client"
+msgstr "Tipus de client LliureX"
+
+#: conkyrc_gui:46
+msgid "ARCHITECTURE"
+msgstr "ARQUITECTURA"
+
+#: conkyrc_gui:47
+msgid "Architecture type, 32 or 64 Bits"
+msgstr "Tipus d'arquitectura, 32 o 64 bits"
+
+#: conkyrc_gui:48
+msgid "VERSION"
+msgstr "VERSIÓ"
+
+#: conkyrc_gui:49
+msgid "LliureX version installed"
+msgstr "Número de versió LliureX instal·lada"
+
+#: conkyrc_gui:50 conkyrc_gui:77
+msgid "NET ADDRESS"
+msgstr "ADREÇA DE XARXA"
+
+#: conkyrc_gui:51 conkyrc_gui:78
+msgid "Show Ip address for every netcards connected"
+msgstr "Ens mostra la IP de cada targeta de xarxa"
+
+#: conkyrc_gui:52
+msgid "MIRROR"
+msgstr "RÈPLICA"
+
+#: conkyrc_gui:53
+msgid "LliureX version mirror downloaded"
+msgstr "Versió de la rèplica de LliureX baixada"
+
+#: conkyrc_gui:54
+msgid "HDD ALERT"
+msgstr "AVÍS DEL DISC DUR"
+
+#: conkyrc_gui:55
+msgid "Alert to the user, if the hard disk has occuped 91% or more"
+msgstr ""
+"Si el disc del sistema arriba al 91% o més, apareix un missatge d'avís."
+
+#: conkyrc_gui:56
+msgid "KERNEL VERSION"
+msgstr "VERSIÓ DEL NUCLI"
+
+#: conkyrc_gui:57
+msgid "kernel version used at the moment"
+msgstr "Versió del nucli utilitzada actualment"
+
+#: conkyrc_gui:58
+msgid "UPTIME"
+msgstr "TEMPS EN FUNCIONAMENT"
+
+#: conkyrc_gui:59
+msgid "Uptime"
+msgstr "Temps d'ús"
+
+#: conkyrc_gui:60
+msgid "how much time has the machine uptime"
+msgstr "Temps que duu la màquina en funcionament sense reiniciar"
+
+#: conkyrc_gui:61
+msgid "CPU TYPE"
+msgstr "TIPUS DE CPU"
+
+#: conkyrc_gui:62
+msgid "Cpu type installed at the Pc"
+msgstr "Tipus de processador instal·lat en el PC"
+
+#: conkyrc_gui:63
+msgid "CPU BAR"
+msgstr "ÚS DE LA CPU"
+
+#: conkyrc_gui:64
+msgid "Process bar for indicate CPU used in %"
+msgstr "Barra que indica el percentatge d'ús de la CPU"
+
+#: conkyrc_gui:65
+msgid "CPU GRAPH"
+msgstr "GRÀFICA DE LA CPU"
+
+#: conkyrc_gui:66
+msgid "Cpu graphic to monitorize it at time"
+msgstr "Gràfica que mostra l'ús de la CPU durant la sessió"
+
+#: conkyrc_gui:67
+msgid "RAM USAGE"
+msgstr "ÚS DE LA RAM"
+
+#: conkyrc_gui:68
+msgid "RAM Usage"
+msgstr "ÚS de la RAM"
+
+#: conkyrc_gui:69
+msgid "Show how many Ram is installed and how many Ram is used at the moment"
+msgstr "Indica la quantitat de RAM que tenim i quanta està ocupada ara mateix."
+
+#: conkyrc_gui:70
+msgid "RAM BAR"
+msgstr "GRÀFICA DE LA RAM"
+
+#: conkyrc_gui:71
+msgid "Ram bar to indicate how many it's used at the moment"
+msgstr "Barra que indica el percentatge d'ús de la RAM"
+
+#: conkyrc_gui:72
+msgid "SWAP USAGE"
+msgstr "ÚS MEM. INTERCANVI"
+
+#: conkyrc_gui:73
+msgid "SWAP Usage"
+msgstr "ÚS men. inter"
+
+#: conkyrc_gui:74
+msgid "Show how many Swap is installed and how many Swap is used at the moment"
+msgstr ""
+"Indica la quantitat de memòria d'intercanvi que tenim i quanta està ocupada "
+"ara mateix"
+
+#: conkyrc_gui:75
+msgid "SWAP BAR"
+msgstr "GRÀFICA DE LA MEMÒRIA D'INTERCANVI"
+
+#: conkyrc_gui:76
+msgid "Swap bar to indicate how many it's used at the moment"
+msgstr "Barra que indica el percentatge d'ús de la memòria d'intercanvi"
+
+#: conkyrc_gui:79
+#: lliurex-conky/conkyrc.gui:235
+msgid "NET DOWNLOAD"
+msgstr "VELOCITAT DE BAIXADA"
+
+#: conkyrc_gui:80
+msgid "Show net speed downloading files"
+msgstr "Ens mostra la velocitat de la xarxa en la baixada de fitxers"
+
+#: conkyrc_gui:81
+msgid "NET UPLOAD"
+msgstr "VELOCITAT DE PUJADA"
+
+#: conkyrc_gui:82
+msgid "Show net speed uploading files"
+msgstr "Ens mostra la velocitat de la xarxa en la pujada de fitxers"
+
+#: conkyrc_gui:83
+msgid "HDD USED"
+msgstr "ÚS DEL DISC DUR"
+
+#: conkyrc_gui:84
+msgid "Bar to indicates HDD used"
+msgstr "Gràfica que ens mostra l'ús del disc dur"
+
+#: conkyrc_gui:85
+msgid "DATA"
+msgstr "DADES"
+
+#: conkyrc_gui:86
+msgid "SYSTEM"
+msgstr "SISTEMA"
+
+#: conkyrc_gui:87
+msgid "HDD"
+msgstr "Disc dur"
+
+#: conkyrc_gui:88
+msgid "Server"
+msgstr "Servidor"
+
+#: conkyrc_gui:89
+msgid "Thin"
+msgstr "Lleuger"
+
+#: conkyrc_gui:90
+msgid "Heavy"
+msgstr "Pesat"
+
+#: conkyrc_gui:91
+msgid "Fat"
+msgstr "Semilleuger"
+
+#: conkyrc_gui:92
+msgid "Desktop"
+msgstr "Escriptori"
+
+#: conkyrc_gui:93
+msgid "Do you want to change colour fonts or use default mode?"
+msgstr ""
+"Voleu canviar el color del tipus de lletra o utilitzar el mode per defecte?"
+
+#: conkyrc_gui:94
+msgid "DEFAULT"
+msgstr "PER DEFECTE"
+
+#: conkyrc_gui:95
+msgid "CHANGE"
+msgstr "CANVIA"
+
+#: conkyrc_gui:96
+msgid "TIME"
+msgstr "HORA"
+
+#: conkyrc_gui:97
+msgid "You can show the time with this clock in the desktop"
+msgstr "Podeu mostrar l'hora amb aquest rellotge en l'escriptori"
+
+#: conkyrc_gui:98
+msgid "DATE"
+msgstr "DATA"
+
+#: conkyrc_gui:99
+msgid "You can show the date in your desktop"
+msgstr "Podeu mostrar la data en l'escriptori"
+
+#: conkyrc_gui:100
+msgid "TRANSPARENT"
+msgstr "TRANSPARENT"
+
+#: conkyrc_gui:101
+msgid "You eliminate the shadow in Conky desktop"
+msgstr "Heu eliminat l'ombra en el Conky de l'escriptori"
+
+#: conkyrc_gui:102
+msgid "black"
+msgstr "negre"
+
+#: conkyrc_gui:103
+msgid "white"
+msgstr "blanc"
+
+#: conkyrc_gui:104
+msgid "cyan"
+msgstr "cian"
+
+#: conkyrc_gui:105
+msgid "red"
+msgstr "roig"
+
+#: conkyrc_gui:106
+msgid "green"
+msgstr "verd"
+
+#: conkyrc_gui:107
+msgid "yellow"
+msgstr "groc"
+
+#: conkyrc_gui:108
+msgid "purple"
+msgstr "morat"
+
+#: conkyrc_gui:109
+msgid "Personal colour"
+msgstr "Color personalitzat"
+
+#~ msgid "ESTILO"
+#~ msgstr "ESTIL"
+
+#~ msgid "DATOS"
+#~ msgstr "DADES"
+
+#~ msgid "Pesado"
+#~ msgstr "Pesat"
+
+#~ msgid "Ligero"
+#~ msgstr "Lleuger"
+
+#~ msgid "Semiligero"
+#~ msgstr "Semilleuger"
